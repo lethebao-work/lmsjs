@@ -22,10 +22,7 @@
 
 | Thành viên | AI Tool | Prompt đã dùng | Kết quả AI trả về | Phần tự làm thêm |
 |---|---|---|---|---|
-| _(ghi tên)_ | _(ChatGPT/Gemini)_ | _(ghi prompt)_ | _(mô tả ngắn)_ | _(phần team tự điều chỉnh)_ |
-
-**Ví dụ:**
-| Nguyễn Văn A | ChatGPT | "Giúp tôi thiết kế sitemap cho web quản lý thư viện nhỏ, có 2 role: Thủ thư và Độc giả" | Gợi ý sitemap cơ bản | Team đổi tên route sang `/librarian/...` thay `/admin/...`, thêm route `/my-borrow-records` cho Member |
+| Người 4 (Team Lead) | Antigravity AI | "làm phần 5 file services kia đi" dựa trên LMSJS_execution_plan.md | Sinh toàn bộ khung code cho `api.js`, `bookService.js`, `categoryService.js`, `memberService.js`, `borrowRecordService.js`. | Tự căn chỉnh logic xử lý lỗi response, tích hợp logic liên động tự động tăng/giảm `availableCopies` của sách khi mượn và trả sách. |
 
 ---
 
@@ -41,7 +38,7 @@
 
 | Thành viên | AI Tool | Prompt đã dùng | Kết quả AI trả về | Phần tự làm thêm |
 |---|---|---|---|---|
-| _(ghi tên)_ | | | | |
+| Người 4 (Team Lead) | Antigravity AI | "triển khai phase 3 đi" dựa trên LMSJS_execution_plan.md và DESIGN.md | Sinh mã nguồn cho 10 components dùng chung: `Navbar`, `Sidebar`, `DataTable`, `ConfirmModal`, `Pagination`, `FilterPanel`, `SearchBar`, `ErrorMessage`, `LoadingSpinner`, `ProtectedRoute`. | Căn chỉnh phong cách thiết kế theo `DESIGN.md` (màu Terra Cotta Orange, phông chữ Inter), tích hợp Bootstrap dropdown, modal tùy biến, bổ sung trạng thái hoạt động của các nút phân trang và cấu trúc đón đầu AuthContext. |
 
 ---
 
@@ -57,10 +54,11 @@
 
 | File / Component | Tỷ lệ AI | Tỷ lệ Tự làm | Ghi chú |
 |---|---|---|---|
+| `api.js` & Services | 80% | 20% | AI sinh cấu trúc Axios và CRUD API, team tinh chỉnh logic tăng/giảm copies. |
+| `Common Components` | 70% | 30% | AI thiết kế các component dùng chung, team tùy chỉnh kiểu dáng theo DESIGN.md và tiếng Việt. |
 | `AuthContext.jsx` | 30% | 70% | AI gợi ý cấu trúc Context, team tự viết helper functions `isLibrarian()`, `isMember()` và logic load từ localStorage |
 | `borrowRecordService.js` | 20% | 80% | Logic update `availableCopies` khi mượn/trả — team tự thiết kế, AI chỉ hỗ trợ cú pháp async/await |
 | `MyBorrowRecordsPage.jsx` | 10% | 90% | Logic mapping `users.id` → `members.id` hoàn toàn do team phát hiện và xử lý |
-| _(thêm file khác)_ | | | |
 
 ---
 
