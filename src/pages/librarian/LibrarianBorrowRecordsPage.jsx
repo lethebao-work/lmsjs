@@ -45,7 +45,7 @@ export default function LibrarianBorrowRecordsPage() {
         <h2 className="mb-3">Quản lý mượn/trả sách</h2>
         <div className="card shadow-sm p-3 mb-4">
           <h5>Tạo phiếu mượn mới</h5>
-          <BorrowRecordForm onSubmit={handleCreate} />
+          <BorrowRecordForm onSubmit={handleCreate} books={books} members={members} />
         </div>
         <div className="card shadow-sm p-3">
           <h5>Danh sách phiếu mượn</h5>

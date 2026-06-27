@@ -2,16 +2,27 @@ import { useState, useEffect } from 'react';
 import bookService from '../../services/bookService';
 import memberService from '../../services/memberService';
 
-export default function BorrowRecordForm({ onSubmit }) {
+export default function BorrowRecordForm({ onSubmit, books: availableBooks, members: availableMembers }) {
   const [books, setBooks] = useState([]);
   const [members, setMembers] = useState([]);
   const [form, setForm] = useState({ bookId: '', memberId: '', dueDate: '' });
   const [error, setError] = useState('');
 
   useEffect(() => {
-    bookService.getAllBooks().then(data => setBooks(data.filter(b => b.availableCopies > 0)));
-    memberService.getAllMembers().then(setMembers);
-  }, []);
+    if (availableBooks && availableMembers) {
+      setBooks(availableBooks.filter(b => b.availableCopies > 0));
+      setMembers(availableMembers);
+      return;
+    }
+
+    Promise.all([
+      bookService.getAllBooks(),
+      memberService.getAllMembers()
+    ]).then(([bookData, memberData]) => {
+      setBooks(bookData.filter(b => b.availableCopies > 0));
+      setMembers(memberData);
+    });
+  }, [availableBooks, availableMembers]);
 
   const handleSubmit = () => {
     if (!form.bookId || !form.memberId || !form.dueDate) {

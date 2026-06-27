@@ -18,6 +18,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "server": "npx json-server --watch database.json --port 9999",
     "dev": "concurrently \"npm start\" \"npm run server\""
   },

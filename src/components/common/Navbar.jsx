@@ -45,16 +45,14 @@ export default function Navbar() {
             )}
             {isLibrarian() && (
               <li className="nav-item dropdown">
-                <a 
-                  className="nav-link dropdown-toggle px-3 text-white-50" 
-                  href="#" 
+                <button
+                  className="nav-link dropdown-toggle px-3 text-white-50 btn btn-link"
                   id="navbarDropdown" 
-                  role="button" 
                   data-bs-toggle="dropdown" 
                   aria-expanded="false"
                 >
                   Quản lý thư viện
-                </a>
+                </button>
                 <ul className="dropdown-menu border-0 shadow mt-2" aria-labelledby="navbarDropdown" style={{ borderRadius: '8px' }}>
                   <li><Link className="dropdown-item py-2 px-3" to="/librarian/books">📚 Quản lý sách</Link></li>
                   <li><Link className="dropdown-item py-2 px-3" to="/librarian/categories">🏷️ Quản lý thể loại</Link></li>

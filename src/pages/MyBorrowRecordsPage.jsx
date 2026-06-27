@@ -16,6 +16,11 @@ export default function MyBorrowRecordsPage() {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!user?.uId) {
+        setLoading(false);
+        return;
+      }
+
       try {
         // QUAN TRỌNG: phải dùng members.userId để tìm member.id
         const member = await memberService.getMemberByUserId(user.uId);
@@ -34,7 +39,7 @@ export default function MyBorrowRecordsPage() {
       }
     };
     fetchData();
-  }, []);
+  }, [user?.uId]);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
