@@ -1,0 +1,77 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "librarian@lmsjs.com",
+      "password": "admin123",
+      "fullname": "Thủ thư chính",
+      "role": "librarian"
+    },
+    {
+      "id": 2,
+      "email": "member@lmsjs.com",
+      "password": "member123",
+      "fullname": "Độc giả 1",
+      "role": "member"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Công nghệ"
+    },
+    {
+      "id": 2,
+      "name": "Văn học"
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "categoryId": 1,
+      "totalCopies": 5,
+      "availableCopies": 3,
+      "coverImage": ""
+    },
+    {
+      "id": 2,
+      "title": "Đắc Nhân Tâm",
+      "author": "Dale Carnegie",
+      "categoryId": 2,
+      "totalCopies": 4,
+      "availableCopies": 0,
+      "coverImage": ""
+    }
+  ],
+  "members": [
+    {
+      "id": 1,
+      "name": "Nguyễn Văn A",
+      "email": "member@lmsjs.com",
+      "phone": "0912345678",
+      "userId": 2
+    }
+  ],
+  "borrowRecords": [
+    {
+      "id": 1,
+      "bookId": 1,
+      "memberId": 1,
+      "borrowDate": "2026-06-15",
+      "dueDate": "2026-06-29",
+      "returnDate": null,
+      "status": "borrowed"
+    },
+    {
+      "id": 2,
+      "bookId": 2,
+      "memberId": 1,
+      "borrowDate": "2026-06-01",
+      "dueDate": "2026-06-15",
+      "returnDate": "2026-06-14",
+      "status": "returned"
+    }
+  ]
+}
