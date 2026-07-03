@@ -171,12 +171,15 @@ src/
 AI_USAGE.md                        // [Bắt buộc CLO9] log AI tools, prompt, phần code AI hỗ trợ
 ```
 
-**Lưu ý phân việc theo module (3-5 người):**
-- Người 1: Book module (FR1, FR6, FR7) + BookCard/BookList/BookForm
-- Người 2: BorrowRecord module (FR4, FR5, FR9) — phần khó nhất vì có logic liên động Book ↔ BorrowRecord, nên giao cho người vững nhất
-- Người 3: Auth/Member + Category module (FR2, FR3) — AuthContext, ProtectedRoute, Login
-- Người 4 (nếu có): common components (Pagination, SearchBar, DataTable, **Sidebar, ConfirmModal**) + routing tổng (kèm **Lazy Loading**) + deploy
-- Người 5 (nếu có): UI/Responsive (Bootstrap) + **Toast Notification** + UI flow polish + chuẩn bị presentation + **AI_USAGE.md**
+**Bảng phân công nhiệm vụ 5 thành viên (Đảm bảo khối lượng công việc cân bằng):**
+
+| Thành viên | Trách nhiệm chính | Chi tiết công việc & File phụ trách | Luồng nghiệp vụ chính |
+|---|---|---|---|
+| **Người 1** | **Quản lý Sách (Book Module)** | - `src/components/book/BookCard.jsx`<br>- `src/components/book/BookForm.jsx`<br>- `src/components/book/BookList.jsx`<br>- `src/pages/HomePage.jsx`<br>- `src/pages/BooksPage.jsx`<br>- `src/pages/BookDetailPage.jsx`<br>- `src/pages/librarian/LibrarianBooksPage.jsx`<br>- `src/pages/librarian/LibrarianDashboard.jsx`<br>- `public/images/` (ảnh bìa sách: `aristotle.jpg`, `harrypotter.jpg`, etc.) | Hiển thị sách ở trang chủ và danh sách lọc. Thực hiện chức năng tìm kiếm, phân trang và xem chi tiết sách. Phía thủ thư: hiển thị dashboard thống kê, quản lý CRUD sách (thêm, sửa, xóa). |
+| **Người 2** | **Quản lý Mượn/Trả (BorrowRecord)** | - `src/components/borrowRecord/BorrowRecordForm.jsx`<br>- `src/components/borrowRecord/BorrowRecordTable.jsx`<br>- `src/components/borrowRecord/MyBorrowRecordHistory.jsx`<br>- `src/pages/member/MemberDashboard.jsx`<br>- `src/pages/MyBorrowRecordsPage.jsx`<br>- `src/pages/librarian/LibrarianBorrowRecordsPage.jsx`<br>- `database.json` (Quản lý mock DB & data seeding) | Logic mượn trả sách (nghiệp vụ lõi): Tạo phiếu mượn (giảm `availableCopies` của sách); trả sách (tăng lại `availableCopies`). Lọc lịch sử mượn trả của độc giả. |
+| **Người 3** | **Xác thực & Người dùng (Auth & Member)** | - `src/context/AuthContext.jsx`<br>- `src/components/common/ProtectedRoute.jsx`<br>- `src/components/member/MemberForm.jsx`<br>- `src/components/member/MemberList.jsx`<br>- `src/pages/LoginPage.jsx`<br>- `src/pages/ProfilePage.jsx`<br>- `src/pages/librarian/LibrarianMembersPage.jsx` | Quản lý AuthContext (login, logout, check role). Bảo vệ các router bằng ProtectedRoute. Thủ thư quản lý CRUD danh sách thành viên/độc giả. |
+| **Người 4** | **Layout & Cấu hình Core (App Core)** | - `src/App.js` & `src/App.css`<br>- `src/index.js` & `src/index.css`<br>- `src/services/api.js`<br>- `src/services/bookService.js`<br>- `src/services/borrowRecordService.js`<br>- `src/services/categoryService.js`<br>- `src/services/memberService.js`<br>- `src/components/common/Navbar.jsx`<br>- `src/components/common/Sidebar.jsx`<br>- `src/components/common/Footer.jsx`<br>- `package.json`, `package-lock.json`, `.gitignore`<br>- `public/index.html`, `robots.txt`, `manifest.json`<br>- `public/favicon.ico`, `logo192.png`, `logo512.png` | Setup dự án, cấu hình Axios API call base, viết các file Service CRUD. Tích hợp components & pages vào App.js (Lazy Loading). Xây dựng Layout chung và deploy ứng dụng. |
+| **Người 5** | **Thể loại & Common UI (Category & UI)** | - `src/components/category/CategoryForm.jsx`<br>- `src/pages/librarian/LibrarianCategoriesPage.jsx`<br>- `src/components/common/ConfirmModal.jsx`<br>- `src/components/common/DataTable.jsx`<br>- `src/components/common/ErrorMessage.jsx`<br>- `src/components/common/FilterPanel.jsx`<br>- `src/components/common/LoadingSpinner.jsx`<br>- `src/components/common/Pagination.jsx`<br>- `src/components/common/SearchBar.jsx`<br>- `README.md`, `AI_USAGE.md`<br>- `PHASE9_TEST_REPORT.md` (QA/Test report) | Phát triển các UI components dùng chung. Quản lý CRUD thể loại sách. Kiểm thử toàn bộ hệ thống (QA), viết báo cáo test và tài liệu dự án. |
 
 ---
 

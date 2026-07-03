@@ -159,8 +159,8 @@ git push -u origin main
 git checkout -b feature/auth-context       # Người 3
 git checkout -b feature/book-module        # Người 1
 git checkout -b feature/borrow-module      # Người 2
-git checkout -b feature/member-category    # Người 3
-git checkout -b feature/common-components  # Người 4
+git checkout -b feature/member-module      # Người 3
+git checkout -b feature/common-components  # Người 5
 ```
 
 ---

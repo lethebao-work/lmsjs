@@ -2,21 +2,34 @@
 
 ---
 
-## Trạng thái hiện tại
+## 🎯 Bảng Phân Công Nhiệm Vụ 5 Thành Viên
+*(Bảng này sử dụng để copy vào file 1_Proposal.docx)*
+
+| Thành viên | Trách nhiệm chính | Chi tiết công việc & File phụ trách | Luồng nghiệp vụ chính |
+|---|---|---|---|
+| **Người 1** | **Quản lý Sách (Book Module)** | - `src/components/book/BookCard.jsx`<br>- `src/components/book/BookForm.jsx`<br>- `src/components/book/BookList.jsx`<br>- `src/pages/HomePage.jsx`<br>- `src/pages/BooksPage.jsx`<br>- `src/pages/BookDetailPage.jsx`<br>- `src/pages/librarian/LibrarianBooksPage.jsx`<br>- `src/pages/librarian/LibrarianDashboard.jsx`<br>- `public/images/` (ảnh bìa sách: `aristotle.jpg`, `harrypotter.jpg`, etc.) | Hiển thị sách ở trang chủ và danh sách lọc. Thực hiện chức năng tìm kiếm, phân trang và xem chi tiết sách. Phía thủ thư: hiển thị dashboard thống kê, quản lý CRUD sách (thêm, sửa, xóa). |
+| **Người 2** | **Quản lý Mượn/Trả (BorrowRecord)** | - `src/components/borrowRecord/BorrowRecordForm.jsx`<br>- `src/components/borrowRecord/BorrowRecordTable.jsx`<br>- `src/components/borrowRecord/MyBorrowRecordHistory.jsx`<br>- `src/pages/member/MemberDashboard.jsx`<br>- `src/pages/MyBorrowRecordsPage.jsx`<br>- `src/pages/librarian/LibrarianBorrowRecordsPage.jsx`<br>- `database.json` (Quản lý mock DB & data seeding) | Logic mượn trả sách (nghiệp vụ lõi): Tạo phiếu mượn (giảm `availableCopies` của sách); trả sách (tăng lại `availableCopies`). Lọc lịch sử mượn trả của độc giả. |
+| **Người 3** | **Xác thực & Người dùng (Auth & Member)** | - `src/context/AuthContext.jsx`<br>- `src/components/common/ProtectedRoute.jsx`<br>- `src/components/member/MemberForm.jsx`<br>- `src/components/member/MemberList.jsx`<br>- `src/pages/LoginPage.jsx`<br>- `src/pages/ProfilePage.jsx`<br>- `src/pages/librarian/LibrarianMembersPage.jsx` | Quản lý AuthContext (login, logout, check role). Bảo vệ các router bằng ProtectedRoute. Thủ thư quản lý CRUD danh sách thành viên/độc giả. |
+| **Người 4** | **Layout & Cấu hình Core (App Core)** | - `src/App.js` & `src/App.css`<br>- `src/index.js` & `src/index.css`<br>- `src/services/api.js`<br>- `src/services/bookService.js`<br>- `src/services/borrowRecordService.js`<br>- `src/services/categoryService.js`<br>- `src/services/memberService.js`<br>- `src/components/common/Navbar.jsx`<br>- `src/components/common/Sidebar.jsx`<br>- `src/components/common/Footer.jsx`<br>- `package.json`, `package-lock.json`, `.gitignore`<br>- `public/index.html`, `robots.txt`, `manifest.json`<br>- `public/favicon.ico`, `logo192.png`, `logo512.png` | Setup dự án, cấu hình Axios API call base, viết các file Service CRUD. Tích hợp components & pages vào App.js (Lazy Loading). Xây dựng Layout chung và deploy ứng dụng. |
+| **Người 5** | **Thể loại & Common UI (Category & UI)** | - `src/components/category/CategoryForm.jsx`<br>- `src/pages/librarian/LibrarianCategoriesPage.jsx`<br>- `src/components/common/ConfirmModal.jsx`<br>- `src/components/common/DataTable.jsx`<br>- `src/components/common/ErrorMessage.jsx`<br>- `src/components/common/FilterPanel.jsx`<br>- `src/components/common/LoadingSpinner.jsx`<br>- `src/components/common/Pagination.jsx`<br>- `src/components/common/SearchBar.jsx`<br>- `README.md`, `AI_USAGE.md`<br>- `PHASE9_TEST_REPORT.md` (QA/Test report) | Phát triển các UI components dùng chung. Quản lý CRUD thể loại sách. Kiểm thử toàn bộ hệ thống (QA), viết báo cáo test và tài liệu dự án. |
+
+---
+
+## 🚀 Trạng thái hiện tại các Phase
 
 | Phase    | Tên                | Trạng thái           | Người làm                |
 | -------- | ------------------- | ---------------------- | --------------------------- |
 | Phase 0  | Project Setup       | ✅ XONG                | Tất cả                    |
 | Phase 1  | Services Layer      | ✅ XONG (trên main)   | Người 4                   |
 | Phase 2  | Auth                | 🔄 Đang làm          | **Người 3**         |
-| Phase 3  | Common Components   | 🔄 Đang làm          | **Người 4**         |
+| Phase 3  | Common Components   | 🔄 Đang làm          | **Người 5**         |
 | Phase 4  | Book Module         | ⏳ Chờ Phase 1        | **Người 1**         |
 | Phase 5  | BorrowRecord Module | ⏳ Chờ Phase 1        | **Người 2**         |
 | Phase 6  | Public Pages        | ⏳ Chờ Phase 3+4+5    | **Người 1 + 2**     |
-| Phase 7  | Librarian Pages     | ⏳ Chờ Phase 3+4+5    | **Người 1 + 2 + 3** |
-| Phase 8  | App.js hoàn chỉnh | ⏳ Chờ tất cả merge | **Người 4**         |
+| Phase 7  | Librarian Pages     | ⏳ Chờ Phase 3+4+5    | **Người 1, 2, 3, 5** |
+| Phase 8  | App.js hoàn chỉnh   | ⏳ Chờ tất cả merge | **Người 4**         |
 | Phase 9  | Testing             | ⏳ Chờ Phase 8        | **Người 5**         |
-| Phase 10 | Deploy              | ⏳ Cuối cùng         | **Người 4 + 5**     |
+| Phase 10 | Deploy              | ⏳ Cuối cùng         | **Người 4**         |
 
 ---
 
@@ -78,7 +91,7 @@ git push origin feature/auth-context
 
 ## PHASE 3 — Common Components 🔄 Đang chạy
 
-**Người phụ trách: Người 4 | Branch: `feature/common-components`**
+**Người phụ trách: Người 5 | Branch: `feature/common-components`**
 
 ```bash
 git checkout feature/common-components
@@ -241,7 +254,7 @@ git push origin feature/borrow-module
 
 ## PHASE 7 — Librarian Pages
 
-**Người phụ trách: Người 1 + 2 + 3 | Trong branch của mỗi người**
+**Người phụ trách: Người 1 + 2 + 3 + 5 | Trong branch của mỗi người**
 
 > ⏳ **Điều kiện:** Phase 3 (common có Sidebar) đã merge vào main
 
@@ -250,25 +263,35 @@ git push origin feature/borrow-module
 | `src/pages/librarian/LibrarianDashboard.jsx` | Người 1 | feature/book-module |
 | `src/pages/librarian/LibrarianBooksPage.jsx` | Người 1 | feature/book-module |
 | `src/pages/librarian/LibrarianBorrowRecordsPage.jsx` | Người 2 | feature/borrow-module |
-| `src/pages/librarian/LibrarianMembersPage.jsx` | Người 3 | feature/member-category |
-| `src/pages/librarian/LibrarianCategoriesPage.jsx` | Người 3 | feature/member-category |
+| `src/pages/librarian/LibrarianMembersPage.jsx` | Người 3 | feature/member-module |
+| `src/pages/librarian/LibrarianCategoriesPage.jsx` | Người 5 | feature/common-components |
 
-**Người 3 — Branch `feature/member-category`:**
+**Người 3 — Branch `feature/member-module`:**
 
 ```bash
-git checkout feature/member-category
+git checkout feature/member-module
 git merge main  # lấy services + common components
 
 # File cần tạo:
 # src/components/member/MemberForm.jsx
 # src/components/member/MemberList.jsx
-# src/components/category/CategoryForm.jsx
 # src/pages/librarian/LibrarianMembersPage.jsx
+
+git add src/components/member/ src/pages/librarian/LibrarianMembersPage.jsx
+git commit -m "feat(member): forms, list, librarian pages"
+git push origin feature/member-module
+```
+
+**Người 5 — Branch `feature/common-components`:**
+
+```bash
+# File cần tạo thêm:
+# src/components/category/CategoryForm.jsx
 # src/pages/librarian/LibrarianCategoriesPage.jsx
 
-git add src/components/member/ src/components/category/ src/pages/librarian/LibrarianMembersPage.jsx src/pages/librarian/LibrarianCategoriesPage.jsx
-git commit -m "feat(member-category): forms, list, librarian pages"
-git push origin feature/member-category
+git add src/components/category/ src/pages/librarian/LibrarianCategoriesPage.jsx
+git commit -m "feat(category): forms, librarian pages"
+git push origin feature/common-components
 ```
 
 ---
