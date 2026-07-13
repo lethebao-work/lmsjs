@@ -18,8 +18,8 @@ export default function Footer() {
           <div className="col-md-6">
             <h6 className="fw-bold text-white mb-3">Thông tin liên hệ</h6>
             <ul className="list-unstyled mb-0 small text-white-50">
-              <li className="mb-2">📞 +0123456789 </li>
-              <li>✉️ support@lms.com</li>
+              <li className="mb-2">SDT: +0123456789 </li>
+              <li>Email: support@lms.com</li>
             </ul>
           </div>
         </div>
