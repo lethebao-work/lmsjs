@@ -89,7 +89,7 @@ export default function MemberDashboard() {
               <p className="text-muted mb-0">Xin chào quay trở lại, {user?.name}!</p>
             </div>
             <button className="btn btn-outline-primary btn-sm" onClick={fetchDashboardData}>
-              🔄 Làm mới
+              Làm mới
             </button>
           </div>
 

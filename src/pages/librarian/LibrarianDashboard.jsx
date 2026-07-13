@@ -90,9 +90,9 @@ export default function LibrarianDashboard() {
       <div className="flex-grow-1 p-4" style={{ minHeight: 'calc(100vh - 72px)', backgroundColor: '#f8f9fa' }}>
         <div className="container-fluid">
           <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 className="fw-bold text-dark mb-0">📊 Bảng điều khiển thủ thư</h2>
+            <h2 className="fw-bold text-dark mb-0">Bảng điều khiển thủ thư</h2>
             <button className="btn btn-outline-primary btn-sm" onClick={fetchData}>
-              🔄 Làm mới
+              Làm mới
             </button>
           </div>
 
@@ -106,7 +106,7 @@ export default function LibrarianDashboard() {
                   <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
                     <div className="d-flex align-items-center">
                       <div className="p-3 bg-primary bg-opacity-10 text-primary rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        📚
+                        Sách
                       </div>
                       <div>
                         <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Tổng đầu sách</h6>
@@ -120,7 +120,7 @@ export default function LibrarianDashboard() {
                   <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
                     <div className="d-flex align-items-center">
                       <div className="p-3 bg-success bg-opacity-10 text-success rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        👥
+                        Độc giả
                       </div>
                       <div>
                         <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Tổng số độc giả</h6>
@@ -134,7 +134,7 @@ export default function LibrarianDashboard() {
                   <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
                     <div className="d-flex align-items-center">
                       <div className="p-3 bg-warning bg-opacity-10 text-warning rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        📖
+                        Mượn
                       </div>
                       <div>
                         <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Đang mượn</h6>
@@ -148,7 +148,7 @@ export default function LibrarianDashboard() {
                   <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
                     <div className="d-flex align-items-center">
                       <div className="p-3 bg-danger bg-opacity-10 text-danger rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        ⏳
+                        Chờ
                       </div>
                       <div>
                         <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Chờ duyệt mượn</h6>
@@ -162,12 +162,12 @@ export default function LibrarianDashboard() {
               {/* Bảng yêu cầu chờ duyệt */}
               <div className="card border-0 shadow-sm p-4 bg-white" style={{ borderRadius: '12px' }}>
                 <h5 className="fw-bold mb-4 d-flex align-items-center gap-2">
-                  <span>⏳</span> Yêu cầu chờ duyệt gần đây
+                  <span>Yêu cầu</span> chờ duyệt gần đây
                 </h5>
 
                 {pendingRecords.length === 0 ? (
                   <div className="text-center py-5 text-muted">
-                    <span className="display-4 d-block mb-3">🎉</span>
+                    <span className="display-4 d-block mb-3">Trống</span>
                     Hiện tại không có yêu cầu mượn sách nào cần phê duyệt!
                   </div>
                 ) : (
