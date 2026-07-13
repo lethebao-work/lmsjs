@@ -111,7 +111,7 @@ export default function ProfilePage() {
           <Col md={user.role === 'member' ? 8 : 6}>
             <Card className="border-0 shadow-sm p-4" style={{ borderRadius: '12px' }}>
               <Card.Body>
-                <h3 className="mb-4 text-primary fw-bold">👤 Hồ sơ cá nhân</h3>
+                <h3 className="mb-4 text-primary fw-bold">Hồ sơ cá nhân</h3>
                 <Form onSubmit={handleSave}>
                   <Row>
                     {/* Cột 1: Thông tin tài khoản chính */}
