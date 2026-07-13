@@ -16,7 +16,7 @@ export default function HomePage() {
   return (
     <div className="container mt-4 pb-5">
       <div className="p-5 mb-4 bg-primary text-white rounded-3 text-center" style={{ backgroundColor: '#2b5876' }}>
-        <h1>📚 Chào mừng đến với LMSJS</h1>
+        <h1>Chào mừng đến với LMSJS</h1>
         <p className="lead">Hệ thống quản lý thư viện mini — nhanh, đơn giản, dễ dùng</p>
       </div>
       <h3 className="mb-3">Sách nổi bật</h3>
