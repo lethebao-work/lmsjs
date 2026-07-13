@@ -11,20 +11,20 @@ export default function Sidebar() {
   if (isLibrarian()) {
     title = 'Phân hệ thủ thư';
     links.push(
-      { to: '/librarian/dashboard', label: '📊 Bảng điều khiển' },
-      { to: '/librarian/books', label: '📚 Quản lý sách' },
-      { to: '/librarian/categories', label: '🏷️ Quản lý thể loại' },
-      { to: '/librarian/members', label: '👤 Quản lý độc giả' },
-      { to: '/librarian/borrow-records', label: '📋 Mượn / Trả sách' },
-      { to: '/profile', label: '👤 Hồ sơ cá nhân' }
+      { to: '/librarian/dashboard', label: 'Bảng điều khiển' },
+      { to: '/librarian/books', label: 'Quản lý sách' },
+      { to: '/librarian/categories', label: 'Quản lý thể loại' },
+      { to: '/librarian/members', label: 'Quản lý độc giả' },
+      { to: '/librarian/borrow-records', label: 'Mượn / Trả sách' },
+      { to: '/profile', label: 'Hồ sơ cá nhân' }
     );
   } else if (isMember()) {
     title = 'Phân hệ độc giả';
     links.push(
-      { to: '/dashboard', label: '📊 Bảng điều khiển' },
-      { to: '/books', label: '📖 Danh mục sách' },
-      { to: '/my-borrow-records', label: '📋 Lịch sử mượn' },
-      { to: '/profile', label: '👤 Hồ sơ cá nhân' }
+      { to: '/dashboard', label: 'Bảng điều khiển' },
+      { to: '/books', label: 'Danh mục sách' },
+      { to: '/my-borrow-records', label: 'Lịch sử mượn' },
+      { to: '/profile', label: 'Hồ sơ cá nhân' }
     );
   }
 
