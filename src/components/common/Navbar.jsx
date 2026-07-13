@@ -15,7 +15,7 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-dark shadow-sm py-3" style={{ backgroundColor: '#262626' }}>
       <div className="container-fluid px-4">
         <Link className="navbar-brand fw-bold d-flex align-items-center" to="/" style={{ color: '#d97706', fontSize: '1.25rem' }}>
-          <span className="me-2" style={{ fontSize: '1.5rem' }}>📚</span> LMSJS
+          LMSJS
         </Link>
         
         <button 
