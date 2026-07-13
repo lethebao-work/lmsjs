@@ -85,7 +85,7 @@ export default function MemberDashboard() {
         <div className="container-fluid">
           <div className="d-flex justify-content-between align-items-center mb-4">
             <div>
-              <h2 className="fw-bold text-dark mb-1">📊 Bảng điều khiển độc giả</h2>
+              <h2 className="fw-bold text-dark mb-1">Bảng điều khiển độc giả</h2>
               <p className="text-muted mb-0">Xin chào quay trở lại, {user?.name}!</p>
             </div>
             <button className="btn btn-outline-primary btn-sm" onClick={fetchDashboardData}>
@@ -103,7 +103,7 @@ export default function MemberDashboard() {
                   <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
                     <div className="d-flex align-items-center">
                       <div className="p-3 bg-warning bg-opacity-10 text-warning rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        📖
+                        Sách
                       </div>
                       <div>
                         <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Sách đang mượn</h6>
@@ -117,7 +117,7 @@ export default function MemberDashboard() {
                   <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
                     <div className="d-flex align-items-center">
                       <div className="p-3 bg-info bg-opacity-10 text-info rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        ⏳
+                        Chờ
                       </div>
                       <div>
                         <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Yêu cầu chờ duyệt</h6>
@@ -131,7 +131,7 @@ export default function MemberDashboard() {
                   <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
                     <div className="d-flex align-items-center">
                       <div className="p-3 bg-success bg-opacity-10 text-success rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        ✅
+                        Đã trả
                       </div>
                       <div>
                         <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Tổng số sách đã mượn</h6>
@@ -145,12 +145,12 @@ export default function MemberDashboard() {
               {/* Sách đang mượn */}
               <div className="card border-0 shadow-sm p-4 bg-white mb-4" style={{ borderRadius: '12px' }}>
                 <h5 className="fw-bold mb-4 d-flex align-items-center gap-2">
-                  <span>📚</span> Sách bạn đang mượn thực tế
+                  <span>Sách</span> bạn đang mượn thực tế
                 </h5>
 
                 {activeBorrows.length === 0 ? (
                   <div className="text-center py-5 text-muted">
-                    <span className="display-4 d-block mb-3">📖</span>
+                    <span className="display-4 d-block mb-3">Sách</span>
                     Bạn chưa mượn cuốn sách nào! Hãy truy cập danh mục để tìm và đăng ký mượn nhé.
                   </div>
                 ) : (
