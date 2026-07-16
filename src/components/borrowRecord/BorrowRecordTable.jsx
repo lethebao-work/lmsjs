@@ -5,7 +5,7 @@ export default function BorrowRecordTable({ records = [], books = [], members = 
 
   return (
     <div className="table-responsive">
-      <table className="table table-striped table-hover align-middle">
+      <table className="table table-striped table-hover align-middle table-bordered">
         <thead className="table-primary">
           <tr>
             <th>Sách</th><th>Độc giả</th><th>Ngày mượn</th>
@@ -21,22 +21,21 @@ export default function BorrowRecordTable({ records = [], books = [], members = 
               <td>{r.dueDate || '—'} {isOverdue(r) && <span className="badge bg-danger ms-1">Quá hạn</span>}</td>
               <td>{r.returnDate || '—'}</td>
               <td>
-                <span className={`badge ${
-                  r.status === 'pending' 
-                    ? 'bg-info text-white' 
-                    : r.status === 'borrowed' 
-                    ? 'bg-warning text-dark' 
-                    : r.status === 'rejected'
-                    ? 'bg-danger text-white'
-                    : 'bg-success'
-                }`}>
-                  {r.status === 'pending' 
-                    ? 'Chờ duyệt' 
-                    : r.status === 'borrowed' 
-                    ? 'Đang mượn' 
-                    : r.status === 'rejected'
-                    ? 'Bị từ chối'
-                    : 'Đã trả'}
+                <span className={`badge ${r.status === 'pending'
+                    ? 'bg-info text-white'
+                    : r.status === 'borrowed'
+                      ? 'bg-warning text-dark'
+                      : r.status === 'rejected'
+                        ? 'bg-danger text-white'
+                        : 'bg-success'
+                  }`}>
+                  {r.status === 'pending'
+                    ? 'Chờ duyệt'
+                    : r.status === 'borrowed'
+                      ? 'Đang mượn'
+                      : r.status === 'rejected'
+                        ? 'Bị từ chối'
+                        : 'Đã trả'}
                 </span>
               </td>
               <td>

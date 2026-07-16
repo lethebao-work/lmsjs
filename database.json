@@ -101,7 +101,7 @@
       "author": "Yann Martel",
       "categoryId": "P6tsMqHYrQA",
       "totalCopies": 4,
-      "availableCopies": 4,
+      "availableCopies": 3,
       "coverImage": "images/lifeofpi.jpg",
       "id": "bAbvlqAvQKk"
     },
@@ -137,7 +137,7 @@
       "author": "Don quixote",
       "categoryId": "ELtDm1M0BIY",
       "totalCopies": 3,
-      "availableCopies": 3,
+      "availableCopies": 2,
       "coverImage": "images/donquixote.jpg",
       "id": "5mIaj8cV6tQ"
     },
@@ -173,7 +173,7 @@
       "author": "James Clear",
       "categoryId": "cat_skills",
       "totalCopies": 5,
-      "availableCopies": 4,
+      "availableCopies": 3,
       "coverImage": "images/lifeofpi.jpg",
       "id": "book_habits"
     },
@@ -335,10 +335,10 @@
     {
       "bookId": "5mIaj8cV6tQ",
       "memberId": "utVRM5U35gA",
-      "dueDate": null,
-      "borrowDate": null,
+      "dueDate": "2026-07-30",
+      "borrowDate": "2026-07-16",
       "returnDate": null,
-      "status": "pending",
+      "status": "borrowed",
       "id": "l82k3BNM7UQ"
     },
     {
@@ -380,10 +380,10 @@
     {
       "bookId": "book_habits",
       "memberId": "member_binh",
-      "dueDate": null,
-      "borrowDate": null,
+      "dueDate": "2026-07-30",
+      "borrowDate": "2026-07-16",
       "returnDate": null,
-      "status": "pending",
+      "status": "borrowed",
       "id": "rec_binh_1"
     },
     {
@@ -398,19 +398,19 @@
     {
       "bookId": "bAbvlqAvQKk",
       "memberId": "utVRM5U35gA",
-      "dueDate": null,
-      "borrowDate": null,
+      "dueDate": "2026-07-30",
+      "borrowDate": "2026-07-16",
       "returnDate": null,
-      "status": "pending",
+      "status": "borrowed",
       "id": "gpqRyu-CeXs"
     },
     {
       "bookId": "Z8TnpmAdqH8",
       "memberId": "utVRM5U35gA",
-      "dueDate": null,
-      "borrowDate": null,
-      "returnDate": null,
-      "status": "pending",
+      "dueDate": "2026-07-30",
+      "borrowDate": "2026-07-16",
+      "returnDate": "2026-07-16",
+      "status": "returned",
       "id": "sMBWqxlVEfY"
     },
     {
@@ -419,8 +419,26 @@
       "dueDate": null,
       "borrowDate": null,
       "returnDate": null,
-      "status": "pending",
+      "status": "rejected",
       "id": "TTk_MdqHzjI"
+    },
+    {
+      "bookId": "bAbvlqAvQKk",
+      "memberId": "member_chi",
+      "dueDate": "2026-07-30",
+      "borrowDate": "2026-07-16",
+      "returnDate": "2026-07-16",
+      "status": "returned",
+      "id": "B-otk9sVecA"
+    },
+    {
+      "bookId": "bAbvlqAvQKk",
+      "memberId": "member_chi",
+      "dueDate": null,
+      "borrowDate": null,
+      "returnDate": null,
+      "status": "pending",
+      "id": "6dUA77WhnhM"
     }
   ],
   "bookSuggestions": [
@@ -430,9 +448,9 @@
       "author": "James Clear",
       "categoryName": "Kỹ năng sống",
       "reason": "Sách giúp sinh viên xây dựng thói quen học tập và quản lý thời gian tốt hơn.",
-      "status": "pending",
+      "status": "approved",
       "createdAt": "2026-07-16",
-      "reviewedAt": null,
+      "reviewedAt": "2026-07-16",
       "librarianNote": "",
       "id": "sgg-atomic-habits"
     },
@@ -466,9 +484,9 @@
       "author": "Robert C. Martin",
       "categoryName": "Công nghệ thông tin",
       "reason": "Sách gối đầu giường để nâng cao tay nghề lập trình viên.",
-      "status": "pending",
+      "status": "approved",
       "createdAt": "2026-07-16",
-      "reviewedAt": null,
+      "reviewedAt": "2026-07-16",
       "librarianNote": "",
       "id": "sgg_clean_code"
     }
