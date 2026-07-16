@@ -4,6 +4,7 @@ import bookService from '../services/bookService';
 import categoryService from '../services/categoryService';
 import memberService from '../services/memberService';
 import borrowRecordService from '../services/borrowRecordService';
+import reviewService from '../services/reviewService';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import LoadingSpinner from '../components/common/LoadingSpinner';
@@ -14,13 +15,20 @@ export default function BookDetailPage() {
   const navigate = useNavigate();
   const [book, setBook] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [requesting, setRequesting] = useState(false);
+  const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
+  const [submittingReview, setSubmittingReview] = useState(false);
   const { user, isMember } = useAuth();
 
   useEffect(() => {
-    Promise.all([bookService.getBookById(id), categoryService.getAllCategories()])
-      .then(([b, c]) => { setBook(b); setCategories(c); })
+    Promise.all([
+      bookService.getBookById(id),
+      categoryService.getAllCategories(),
+      reviewService.getReviewsByBookId(id)
+    ])
+      .then(([b, c, r]) => { setBook(b); setCategories(c); setReviews(r); })
       .finally(() => setLoading(false));
   }, [id]);
 
@@ -57,11 +65,50 @@ export default function BookDetailPage() {
     }
   };
 
+  const handleSubmitReview = async (e) => {
+    e.preventDefault();
+    if (!user || !isMember()) return;
+    
+    if (!reviewForm.comment.trim()) {
+      toast.warning('Vui lòng nhập nội dung bình luận!');
+      return;
+    }
+
+    setSubmittingReview(true);
+    try {
+      const member = await memberService.getMemberByUserId(user.uId);
+      if (!member) {
+        toast.error('Không tìm thấy thông tin độc giả liên kết với tài khoản này!');
+        return;
+      }
+
+      const newReview = await reviewService.createReview({
+        bookId: id,
+        memberId: member.id,
+        rating: Number(reviewForm.rating),
+        comment: reviewForm.comment
+      });
+      
+      // Hiển thị ngay (thêm thông tin member giả định)
+      newReview.member = member;
+      setReviews([newReview, ...reviews]);
+      setReviewForm({ rating: 5, comment: '' });
+      toast.success('Gửi đánh giá thành công!');
+    } catch (error) {
+      toast.error('Có lỗi xảy ra khi gửi đánh giá!');
+    } finally {
+      setSubmittingReview(false);
+    }
+  };
+
   if (loading) return <LoadingSpinner />;
   if (!book) return <p className="alert alert-danger">Không tìm thấy sách!</p>;
 
   const category = categories.find(c => String(c.id) === String(book.categoryId));
   const isAvailable = book.availableCopies > 0;
+  const avgRating = reviews.length > 0 
+    ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1) 
+    : 0;
 
   return (
     <div className="d-flex">
@@ -83,6 +130,13 @@ export default function BookDetailPage() {
               <p><strong>Tác giả:</strong> {book.author}</p>
               <p><strong>Thể loại:</strong> {category?.name || '—'}</p>
               <p>
+                <strong>Đánh giá: </strong> 
+                <span style={{ color: '#ffc107', fontSize: '1.2rem' }}>
+                  {'★'.repeat(Math.round(avgRating))}{'☆'.repeat(5 - Math.round(avgRating))}
+                </span>
+                <span className="ms-2">({avgRating}/5 từ {reviews.length} đánh giá)</span>
+              </p>
+              <p>
                 <strong>Tình trạng: </strong>
                 <span className={isAvailable ? 'text-success fw-bold' : 'text-danger fw-bold'}>
                   {book.availableCopies}/{book.totalCopies}
@@ -102,6 +156,73 @@ export default function BookDetailPage() {
                 )}
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Khung Bình luận & Đánh giá */}
+        <div className="card shadow-sm p-4 mt-4">
+          <h4 className="mb-4">Đánh giá & Bình luận</h4>
+          
+          {isMember() ? (
+            <form onSubmit={handleSubmitReview} className="mb-5 border-bottom pb-4">
+              <div className="d-flex align-items-center mb-3">
+                <label className="form-label fw-bold me-3 mb-0">Chấm điểm:</label>
+                <div style={{ fontSize: '1.5rem', cursor: 'pointer', userSelect: 'none' }}>
+                  {[1, 2, 3, 4, 5].map(star => (
+                    <span 
+                      key={star}
+                      style={{ color: star <= reviewForm.rating ? '#ffc107' : '#e4e5e9' }}
+                      onClick={() => setReviewForm({...reviewForm, rating: star})}
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <span className="ms-3 text-muted">
+                  {reviewForm.rating === 5 && 'Tuyệt vời'}
+                  {reviewForm.rating === 4 && 'Rất hay'}
+                  {reviewForm.rating === 3 && 'Bình thường'}
+                  {reviewForm.rating === 2 && 'Tạm được'}
+                  {reviewForm.rating === 1 && 'Tệ'}
+                </span>
+              </div>
+              <div className="mb-3">
+                <label className="form-label fw-bold">Viết bình luận:</label>
+                <textarea 
+                  className="form-control" 
+                  rows="3" 
+                  placeholder="Chia sẻ cảm nghĩ của bạn về cuốn sách này..."
+                  value={reviewForm.comment}
+                  onChange={(e) => setReviewForm({...reviewForm, comment: e.target.value})}
+                ></textarea>
+              </div>
+              <button type="submit" className="btn btn-primary" disabled={submittingReview}>
+                {submittingReview ? 'Đang gửi...' : 'Gửi Đánh Giá'}
+              </button>
+            </form>
+          ) : (
+            <div className="alert alert-info">
+              Vui lòng <button className="btn btn-link p-0 text-decoration-none" onClick={() => navigate('/login')}>đăng nhập</button> để gửi đánh giá.
+            </div>
+          )}
+
+          <div className="reviews-list">
+            {reviews.length === 0 ? (
+              <p className="text-muted text-center py-3">Chưa có đánh giá nào cho cuốn sách này. Hãy là người đầu tiên!</p>
+            ) : (
+              reviews.map(review => (
+                <div key={review.id} className="review-item mb-3 p-3 bg-light rounded">
+                  <div className="d-flex justify-content-between mb-2">
+                    <span className="fw-bold">{review.member?.fullname || 'Thành viên ẩn danh'}</span>
+                    <small className="text-muted">{new Date(review.createdAt).toLocaleDateString('vi-VN')}</small>
+                  </div>
+                  <div style={{ color: '#ffc107', fontSize: '1.1rem' }} className="mb-2">
+                    {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+                  </div>
+                  <p className="mb-0">{review.comment}</p>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
