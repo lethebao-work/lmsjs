@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import api from '../services/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function LoginPage() {
@@ -55,7 +55,11 @@ export default function LoginPage() {
                 onChange={e => setPassword(e.target.value)}
               />
             </div>
-            <button className="btn btn-primary w-100" onClick={handleLogin}>Đăng nhập</button>
+            <button className="btn btn-primary w-100 mb-3" onClick={handleLogin}>Đăng nhập</button>
+            <div className="text-center">
+              <span>Chưa có tài khoản? </span>
+              <Link to="/register" className="text-primary text-decoration-none fw-semibold">Đăng ký ngay</Link>
+            </div>
           </div>
         </div>
       </div>

@@ -8,9 +8,9 @@
       "role": "librarian"
     },
     {
-      "fullname": "Cao Thanh Tuấn",
-      "email": "member1@lmsjs.com",
-      "password": "123",
+      "fullname": "Vũ Văn Quyết",
+      "email": "member2@lmsjs.com",
+      "password": "12121212",
       "role": "member",
       "id": "DspmOC9F1k4"
     },
@@ -41,6 +41,20 @@
       "password": "123",
       "role": "librarian",
       "id": "2"
+    },
+    {
+      "fullname": "le the bap",
+      "email": "vuvanquyet0305@gmail.com",
+      "password": "12345678",
+      "role": "member",
+      "id": "jreJQae2q98"
+    },
+    {
+      "fullname": "gggfds",
+      "email": "vuvanquyet@gmail.com",
+      "password": "12345678",
+      "role": "member",
+      "id": "tfFUE7Ix1v4"
     }
   ],
   "categories": [
@@ -207,18 +221,27 @@
       "comment": "Hay",
       "createdAt": "2026-07-16T14:54:49.879Z",
       "id": "fX0b7C9I-4o"
+    },
+    {
+      "bookId": "bAbvlqAvQKk",
+      "memberId": "utVRM5U35gA",
+      "rating": 4,
+      "comment": "Kha hay\n",
+      "createdAt": "2026-07-16T15:02:36.960Z",
+      "id": "RH-KMN7D4HU"
     }
   ],
   "members": [
     {
       "userId": "DspmOC9F1k4",
-      "phone": "0123456789",
+      "phone": "0356965077",
       "gender": "Nam",
-      "dob": "2000-10-10",
-      "city": "Hà Nội",
-      "address": "Yên Lãng",
+      "dob": "2005-03-03",
+      "city": "Phú Thọ",
+      "address": "Phú Thọ",
       "favorites": [
-        "Phiêu Lưu"
+        "Phiêu Lưu",
+        "Kỳ ảo"
       ],
       "id": "utVRM5U35gA"
     },
@@ -259,6 +282,26 @@
         "Phân tích dữ liệu"
       ],
       "id": "member_binh"
+    },
+    {
+      "userId": "tfFUE7Ix1v4",
+      "phone": "0987654325",
+      "gender": "Nam",
+      "dob": "2003-10-10",
+      "city": "Hà Nội",
+      "address": "Thon1",
+      "favorites": [],
+      "id": "EXzmfwwL9Bg"
+    },
+    {
+      "userId": "jreJQae2q98",
+      "phone": "0123234555",
+      "gender": "Nam",
+      "dob": "2003-03-03",
+      "city": "Hà Nội",
+      "address": "thon 1",
+      "favorites": [],
+      "id": "VQtOMhYsrh4"
     }
   ],
   "borrowRecords": [
@@ -351,6 +394,15 @@
       "returnDate": null,
       "status": "rejected",
       "id": "rec_binh_2"
+    },
+    {
+      "bookId": "bAbvlqAvQKk",
+      "memberId": "utVRM5U35gA",
+      "dueDate": null,
+      "borrowDate": null,
+      "returnDate": null,
+      "status": "pending",
+      "id": "gpqRyu-CeXs"
     }
   ],
   "bookSuggestions": [
