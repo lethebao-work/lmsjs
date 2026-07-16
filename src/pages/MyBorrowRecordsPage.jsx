@@ -23,7 +23,6 @@ export default function MyBorrowRecordsPage() {
       }
 
       try {
-        // QUAN TRỌNG: phải dùng members.userId để tìm member.id
         const member = await memberService.getMemberByUserId(user.uId);
         if (member) {
           const [recs, bks] = await Promise.all([

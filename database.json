@@ -101,7 +101,7 @@
       "author": "Yann Martel",
       "categoryId": "P6tsMqHYrQA",
       "totalCopies": 4,
-      "availableCopies": 3,
+      "availableCopies": 2,
       "coverImage": "images/lifeofpi.jpg",
       "id": "bAbvlqAvQKk"
     },
@@ -434,10 +434,10 @@
     {
       "bookId": "bAbvlqAvQKk",
       "memberId": "member_chi",
-      "dueDate": null,
-      "borrowDate": null,
+      "dueDate": "2026-07-30",
+      "borrowDate": "2026-07-16",
       "returnDate": null,
-      "status": "pending",
+      "status": "borrowed",
       "id": "6dUA77WhnhM"
     }
   ],
