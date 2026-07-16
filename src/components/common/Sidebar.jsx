@@ -16,6 +16,7 @@ export default function Sidebar() {
       { to: '/librarian/categories', label: 'Quản lý thể loại' },
       { to: '/librarian/members', label: 'Quản lý độc giả' },
       { to: '/librarian/borrow-records', label: 'Mượn / Trả sách' },
+      { to: '/librarian/book-suggestions', label: 'Quản lý yêu cầu sách' },
       { to: '/profile', label: 'Hồ sơ cá nhân' }
     );
   } else if (isMember()) {
@@ -24,6 +25,7 @@ export default function Sidebar() {
       { to: '/dashboard', label: 'Bảng điều khiển' },
       { to: '/books', label: 'Danh mục sách' },
       { to: '/my-borrow-records', label: 'Lịch sử mượn' },
+      { to: '/book-suggestions', label: 'Yêu cầu thêm sách' },
       { to: '/profile', label: 'Hồ sơ cá nhân' }
     );
   }
