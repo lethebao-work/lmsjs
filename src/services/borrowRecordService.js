@@ -64,11 +64,23 @@ const borrowRecordService = {
       status: 'borrowed'
     });
 
+    const newAvailableCopies = book.availableCopies - 1;
+
     // Giảm availableCopies
     await bookService.updateBook(record.bookId, {
       ...book,
-      availableCopies: book.availableCopies - 1
+      availableCopies: newAvailableCopies
     });
+
+    // Nếu sách đã hết (về 0), càn quét các phiếu mượn pending khác của sách này và reject
+    if (newAvailableCopies <= 0) {
+      const allRecords = (await api.get(`/borrowRecords?bookId=${record.bookId}&status=pending`)).data;
+      // Lọc bỏ chính nó (dù nó đã được update thành borrowed rồi, nhưng để cho an toàn)
+      const pendingOthers = allRecords.filter(r => String(r.id) !== String(recordId));
+      for (const pRecord of pendingOthers) {
+        await api.patch(`/borrowRecords/${pRecord.id}`, { status: 'rejected' });
+      }
+    }
 
     return true;
   },
