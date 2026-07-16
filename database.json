@@ -162,5 +162,19 @@
       "id": "l82k3BNM7UQ"
     }
   ],
+  "bookSuggestions": [
+    {
+      "memberId": "utVRM5U35gA",
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "categoryName": "Kỹ năng sống",
+      "reason": "Sách giúp sinh viên xây dựng thói quen học tập và quản lý thời gian tốt hơn.",
+      "status": "pending",
+      "createdAt": "2026-07-16",
+      "reviewedAt": null,
+      "librarianNote": "",
+      "id": "sgg-atomic-habits"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
