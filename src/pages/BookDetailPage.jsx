@@ -20,7 +20,21 @@ export default function BookDetailPage() {
   const [requesting, setRequesting] = useState(false);
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
   const [submittingReview, setSubmittingReview] = useState(false);
+  const [hasBorrowed, setHasBorrowed] = useState(false);
   const { user, isMember } = useAuth();
+
+  useEffect(() => {
+    if (user && isMember()) {
+      memberService.getMemberByUserId(user.uId).then(member => {
+        if (member) {
+          borrowRecordService.getRecordsByMemberId(member.id).then(records => {
+            const borrowed = records.some(r => String(r.bookId) === String(id) && (r.status === 'borrowed' || r.status === 'returned'));
+            setHasBorrowed(borrowed);
+          }).catch(() => {});
+        }
+      }).catch(() => {});
+    }
+  }, [user, id, isMember]);
 
   useEffect(() => {
     Promise.all([
@@ -164,7 +178,8 @@ export default function BookDetailPage() {
           <h4 className="mb-4">Đánh giá & Bình luận</h4>
           
           {isMember() ? (
-            <form onSubmit={handleSubmitReview} className="mb-5 border-bottom pb-4">
+            hasBorrowed ? (
+              <form onSubmit={handleSubmitReview} className="mb-5 border-bottom pb-4">
               <div className="d-flex align-items-center mb-3">
                 <label className="form-label fw-bold me-3 mb-0">Chấm điểm:</label>
                 <div style={{ fontSize: '1.5rem', cursor: 'pointer', userSelect: 'none' }}>
@@ -200,6 +215,11 @@ export default function BookDetailPage() {
                 {submittingReview ? 'Đang gửi...' : 'Gửi Đánh Giá'}
               </button>
             </form>
+            ) : (
+              <div className="alert alert-warning">
+                Bạn chỉ có thể đánh giá sau khi đã được mượn cuốn sách này!
+              </div>
+            )
           ) : (
             <div className="alert alert-info">
               Vui lòng <button className="btn btn-link p-0 text-decoration-none" onClick={() => navigate('/login')}>đăng nhập</button> để gửi đánh giá.
