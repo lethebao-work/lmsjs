@@ -34,7 +34,7 @@ export default function Sidebar() {
 
   return (
     <div
-      className="d-flex flex-column p-4"
+      className="lms-sidebar d-flex flex-column p-4"
       style={{
         minHeight: 'calc(100vh - 72px)',
         width: '260px',
