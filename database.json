@@ -191,6 +191,24 @@
       "id": "book_sapiens"
     }
   ],
+  "reviews": [
+    {
+      "id": "r1",
+      "bookId": "bAbvlqAvQKk",
+      "memberId": "utVRM5U35gA",
+      "rating": 5,
+      "comment": "Sách rất hay và truyền cảm hứng!",
+      "createdAt": "2026-07-16T15:00:00.000Z"
+    },
+    {
+      "bookId": "bAbvlqAvQKk",
+      "memberId": "utVRM5U35gA",
+      "rating": 4,
+      "comment": "Hay",
+      "createdAt": "2026-07-16T14:54:49.879Z",
+      "id": "fX0b7C9I-4o"
+    }
+  ],
   "members": [
     {
       "userId": "DspmOC9F1k4",
