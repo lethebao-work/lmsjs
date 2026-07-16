@@ -13,6 +13,34 @@
       "password": "123",
       "role": "member",
       "id": "DspmOC9F1k4"
+    },
+    {
+      "fullname": "Nguyễn Văn An",
+      "email": "member2@lmsjs.com",
+      "password": "123",
+      "role": "member",
+      "id": "user_member_2"
+    },
+    {
+      "fullname": "Lê Thị Chi",
+      "email": "member3@lmsjs.com",
+      "password": "123",
+      "role": "member",
+      "id": "user_member_3"
+    },
+    {
+      "fullname": "Trần Văn Bình",
+      "email": "member4@lmsjs.com",
+      "password": "123",
+      "role": "member",
+      "id": "user_member_4"
+    },
+    {
+      "fullname": "Hoàng Thị Dung",
+      "email": "librarian2@lmsjs.com",
+      "password": "123",
+      "role": "librarian",
+      "id": "2"
     }
   ],
   "categories": [
@@ -43,6 +71,14 @@
     {
       "name": "Tiếng Anh",
       "id": "PtrUSsXmb_o"
+    },
+    {
+      "name": "Kỹ năng sống",
+      "id": "cat_skills"
+    },
+    {
+      "name": "Lịch sử",
+      "id": "cat_history"
     }
   ],
   "books": [
@@ -108,6 +144,51 @@
       "availableCopies": 1,
       "coverImage": "images/dataanalysis.jpg",
       "id": "Z8TnpmAdqH8"
+    },
+    {
+      "title": "Reinforcement Learning",
+      "author": "Richard S. Sutton",
+      "categoryId": "4zziuUP2Gb4",
+      "totalCopies": 3,
+      "availableCopies": 3,
+      "coverImage": "images/reinforcement.jpg",
+      "id": "book_rl"
+    },
+    {
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "categoryId": "cat_skills",
+      "totalCopies": 5,
+      "availableCopies": 4,
+      "coverImage": "images/lifeofpi.jpg",
+      "id": "book_habits"
+    },
+    {
+      "title": "Nhà giả kim",
+      "author": "Paulo Coelho",
+      "categoryId": "P6tsMqHYrQA",
+      "totalCopies": 4,
+      "availableCopies": 3,
+      "coverImage": "images/donquixote.jpg",
+      "id": "book_alchemist"
+    },
+    {
+      "title": "Đắc Nhân Tâm",
+      "author": "Dale Carnegie",
+      "categoryId": "JL3rvnyetYY",
+      "totalCopies": 5,
+      "availableCopies": 5,
+      "coverImage": "images/aristotle.jpg",
+      "id": "book_carnegie"
+    },
+    {
+      "title": "Sapiens: Lược sử loài người",
+      "author": "Yuval Noah Harari",
+      "categoryId": "cat_history",
+      "totalCopies": 2,
+      "availableCopies": 2,
+      "coverImage": "images/aristotle.jpg",
+      "id": "book_sapiens"
     }
   ],
   "members": [
@@ -122,6 +203,44 @@
         "Phiêu Lưu"
       ],
       "id": "utVRM5U35gA"
+    },
+    {
+      "userId": "user_member_2",
+      "phone": "0912345678",
+      "gender": "Nam",
+      "dob": "1999-01-01",
+      "city": "Đà Nẵng",
+      "address": "Hải Châu",
+      "favorites": [
+        "Văn học"
+      ],
+      "id": "member_an"
+    },
+    {
+      "userId": "user_member_3",
+      "phone": "0987654321",
+      "gender": "Nữ",
+      "dob": "2001-12-15",
+      "city": "Hồ Chí Minh",
+      "address": "Quận 1",
+      "favorites": [
+        "Kỳ ảo",
+        "Tiếng Anh"
+      ],
+      "id": "member_chi"
+    },
+    {
+      "userId": "user_member_4",
+      "phone": "0905556677",
+      "gender": "Nam",
+      "dob": "1998-07-20",
+      "city": "Hải Phòng",
+      "address": "Ngô Quyền",
+      "favorites": [
+        "Triết học",
+        "Phân tích dữ liệu"
+      ],
+      "id": "member_binh"
     }
   ],
   "borrowRecords": [
@@ -160,6 +279,60 @@
       "returnDate": null,
       "status": "pending",
       "id": "l82k3BNM7UQ"
+    },
+    {
+      "bookId": "7238E7u3ZaY",
+      "memberId": "member_an",
+      "dueDate": "2026-07-24",
+      "borrowDate": "2026-07-10",
+      "returnDate": null,
+      "status": "borrowed",
+      "id": "rec_an_1"
+    },
+    {
+      "bookId": "jSC_l2tvmng",
+      "memberId": "member_an",
+      "dueDate": "2026-06-15",
+      "borrowDate": "2026-06-01",
+      "returnDate": "2026-06-14",
+      "status": "returned",
+      "id": "rec_an_2"
+    },
+    {
+      "bookId": "book_rl",
+      "memberId": "member_chi",
+      "dueDate": "2026-07-26",
+      "borrowDate": "2026-07-12",
+      "returnDate": null,
+      "status": "borrowed",
+      "id": "rec_chi_1"
+    },
+    {
+      "bookId": "BNdGtKFmzsM",
+      "memberId": "member_chi",
+      "dueDate": "2026-07-19",
+      "borrowDate": "2026-07-05",
+      "returnDate": "2026-07-18",
+      "status": "returned",
+      "id": "rec_chi_2"
+    },
+    {
+      "bookId": "book_habits",
+      "memberId": "member_binh",
+      "dueDate": null,
+      "borrowDate": null,
+      "returnDate": null,
+      "status": "pending",
+      "id": "rec_binh_1"
+    },
+    {
+      "bookId": "book_alchemist",
+      "memberId": "member_binh",
+      "dueDate": null,
+      "borrowDate": null,
+      "returnDate": null,
+      "status": "rejected",
+      "id": "rec_binh_2"
     }
   ],
   "bookSuggestions": [
@@ -174,6 +347,42 @@
       "reviewedAt": null,
       "librarianNote": "",
       "id": "sgg-atomic-habits"
+    },
+    {
+      "memberId": "member_an",
+      "title": "Sapiens: Lược sử loài người",
+      "author": "Yuval Noah Harari",
+      "categoryName": "Lịch sử",
+      "reason": "Sách cung cấp kiến thức nền tảng rất tốt về lịch sử nhân loại.",
+      "status": "approved",
+      "createdAt": "2026-07-14",
+      "reviewedAt": "2026-07-15",
+      "librarianNote": "Sách rất hay, thư viện đã mua bổ sung và đưa vào phục vụ độc giả.",
+      "id": "sgg_sapiens"
+    },
+    {
+      "memberId": "member_chi",
+      "title": "Think and Grow Rich",
+      "author": "Napoleon Hill",
+      "categoryName": "Phát triển bản thân",
+      "reason": "Giúp sinh viên có tư duy tích cực về tài chính và cuộc sống.",
+      "status": "rejected",
+      "createdAt": "2026-07-13",
+      "reviewedAt": "2026-07-14",
+      "librarianNote": "Hiện tại thư viện đã có 2 cuốn sách này trên kệ rồi em nhé.",
+      "id": "sgg_think"
+    },
+    {
+      "memberId": "member_binh",
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "categoryName": "Công nghệ thông tin",
+      "reason": "Sách gối đầu giường để nâng cao tay nghề lập trình viên.",
+      "status": "pending",
+      "createdAt": "2026-07-16",
+      "reviewedAt": null,
+      "librarianNote": "",
+      "id": "sgg_clean_code"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
