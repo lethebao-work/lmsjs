@@ -101,7 +101,7 @@
       "author": "Yann Martel",
       "categoryId": "P6tsMqHYrQA",
       "totalCopies": 4,
-      "availableCopies": 3,
+      "availableCopies": 4,
       "coverImage": "images/lifeofpi.jpg",
       "id": "bAbvlqAvQKk"
     },
@@ -219,7 +219,7 @@
       "memberId": "utVRM5U35gA",
       "rating": 4,
       "comment": "Hay",
-      "createdAt": "2026-07-16T14:54:49.879Z",
+      "createdAt": "2026-07-14T14:54:49.879Z",
       "id": "fX0b7C9I-4o"
     },
     {
@@ -227,7 +227,7 @@
       "memberId": "utVRM5U35gA",
       "rating": 4,
       "comment": "Kha hay\n",
-      "createdAt": "2026-07-16T15:02:36.960Z",
+      "createdAt": "2026-07-15T15:02:36.960Z",
       "id": "RH-KMN7D4HU"
     }
   ],
@@ -310,8 +310,8 @@
       "memberId": "utVRM5U35gA",
       "dueDate": "2026-07-12",
       "borrowDate": "2026-06-28",
-      "returnDate": null,
-      "status": "borrowed",
+      "returnDate": "2026-07-16",
+      "status": "returned",
       "id": "aRukWN3MWWs"
     },
     {
@@ -403,6 +403,24 @@
       "returnDate": null,
       "status": "pending",
       "id": "gpqRyu-CeXs"
+    },
+    {
+      "bookId": "Z8TnpmAdqH8",
+      "memberId": "utVRM5U35gA",
+      "dueDate": null,
+      "borrowDate": null,
+      "returnDate": null,
+      "status": "pending",
+      "id": "sMBWqxlVEfY"
+    },
+    {
+      "bookId": "Z8TnpmAdqH8",
+      "memberId": "utVRM5U35gA",
+      "dueDate": null,
+      "borrowDate": null,
+      "returnDate": null,
+      "status": "pending",
+      "id": "TTk_MdqHzjI"
     }
   ],
   "bookSuggestions": [

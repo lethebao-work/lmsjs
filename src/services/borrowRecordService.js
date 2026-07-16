@@ -12,6 +12,19 @@ const borrowRecordService = {
     const book = await bookService.getBookById(bookId);
     if (book.availableCopies <= 0) throw new Error('Sách đã hết!');
 
+    // Kiểm tra logic mượn sách:
+    // 1. Tối đa 3 sách (đang mượn + đang chờ duyệt)
+    // 2. Không mượn trùng cuốn sách
+    const records = await borrowRecordService.getRecordsByMemberId(memberId);
+    const activeRecords = records.filter(r => r.status === 'borrowed' || r.status === 'pending');
+    
+    if (activeRecords.length >= 3) {
+      throw new Error('Bạn chỉ được mượn (hoặc đang yêu cầu) tối đa 3 cuốn sách cùng lúc!');
+    }
+    if (activeRecords.some(r => String(r.bookId) === String(bookId))) {
+      throw new Error('Bạn đang mượn hoặc đã gửi yêu cầu mượn cuốn sách này rồi!');
+    }
+
     // Tạo borrow record
     const record = (await api.post('/borrowRecords', {
       bookId, memberId, dueDate,
