@@ -18,8 +18,10 @@ const LibrarianBooksPage = lazy(() => import('./pages/librarian/LibrarianBooksPa
 const LibrarianCategoriesPage = lazy(() => import('./pages/librarian/LibrarianCategoriesPage'));
 const LibrarianMembersPage = lazy(() => import('./pages/librarian/LibrarianMembersPage'));
 const LibrarianBorrowRecordsPage = lazy(() => import('./pages/librarian/LibrarianBorrowRecordsPage'));
+const LibrarianBookSuggestionsPage = lazy(() => import('./pages/librarian/LibrarianBookSuggestionsPage'));
 const LibrarianDashboard = lazy(() => import('./pages/librarian/LibrarianDashboard'));
 const MemberDashboard = lazy(() => import('./pages/member/MemberDashboard'));
+const BookSuggestionPage = lazy(() => import('./pages/member/BookSuggestionPage'));
 
 function App() {
   return (
@@ -40,6 +42,9 @@ function App() {
                 <Route path="/my-borrow-records" element={
                   <ProtectedRoute><MyBorrowRecordsPage /></ProtectedRoute>
                 } />
+                <Route path="/book-suggestions" element={
+                  <ProtectedRoute><BookSuggestionPage /></ProtectedRoute>
+                } />
                 <Route path="/profile" element={
                   <ProtectedRoute><ProfilePage /></ProtectedRoute>
                 } />
@@ -57,6 +62,9 @@ function App() {
                 } />
                 <Route path="/librarian/borrow-records" element={
                   <ProtectedRoute requireLibrarian><LibrarianBorrowRecordsPage /></ProtectedRoute>
+                } />
+                <Route path="/librarian/book-suggestions" element={
+                  <ProtectedRoute requireLibrarian><LibrarianBookSuggestionsPage /></ProtectedRoute>
                 } />
                 <Route path="*" element={<div className="container mt-5"><div className="alert alert-warning">404 — Trang không tồn tại</div></div>} />
               </Routes>
