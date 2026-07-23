@@ -4,57 +4,64 @@
       "id": "1",
       "email": "librarian@lmsjs.com",
       "password": "abc",
-      "fullname": "sieuvippromaxultra",
+      "fullname": "Nguyễn Thị Lan",
       "role": "librarian"
     },
     {
       "fullname": "Vũ Văn Quyết",
-      "email": "member2@lmsjs.com",
+      "email": "quyet.vu@student.lmsjs.com",
       "password": "12121212",
       "role": "member",
       "id": "DspmOC9F1k4"
     },
     {
       "fullname": "Nguyễn Văn An",
-      "email": "member2@lmsjs.com",
-      "password": "123",
+      "email": "an.nguyen@student.lmsjs.com",
+      "password": "123456",
       "role": "member",
       "id": "user_member_2"
     },
     {
       "fullname": "Lê Thị Chi",
-      "email": "member3@lmsjs.com",
-      "password": "123",
+      "email": "chi.le@student.lmsjs.com",
+      "password": "123456",
       "role": "member",
       "id": "user_member_3"
     },
     {
       "fullname": "Trần Văn Bình",
-      "email": "member4@lmsjs.com",
-      "password": "123",
+      "email": "binh.tran@teacher.lmsjs.com",
+      "password": "123456",
       "role": "member",
       "id": "user_member_4"
     },
     {
       "fullname": "Hoàng Thị Dung",
       "email": "librarian2@lmsjs.com",
-      "password": "123",
+      "password": "123456",
       "role": "librarian",
       "id": "2"
     },
     {
-      "fullname": "le the bap",
-      "email": "vuvanquyet0305@gmail.com",
+      "fullname": "Lê Thế Bảo",
+      "email": "bao.le@student.lmsjs.com",
       "password": "12345678",
       "role": "member",
       "id": "jreJQae2q98"
     },
     {
-      "fullname": "gggfds",
-      "email": "vuvanquyet@gmail.com",
+      "fullname": "Phạm Minh Tuấn",
+      "email": "tuan.pham@teacher.lmsjs.com",
       "password": "12345678",
       "role": "member",
       "id": "tfFUE7Ix1v4"
+    },
+    {
+      "fullname": "Chương",
+      "email": "chuong182@gmail.com",
+      "password": "matkhau182",
+      "role": "member",
+      "id": "-j-EG1M3XZo"
     }
   ],
   "categories": [
@@ -99,110 +106,144 @@
     {
       "title": "Life of Pi",
       "author": "Yann Martel",
+      "description": "Câu chuyện kỳ diệu về cậu bé Pi sống sót trên đại dương cùng một con hổ Bengal. Một tác phẩm đầy triết lý về niềm tin và sự sinh tồn.",
       "categoryId": "P6tsMqHYrQA",
       "totalCopies": 4,
-      "availableCopies": 2,
+      "availableCopies": 4,
       "coverImage": "images/lifeofpi.jpg",
-      "id": "bAbvlqAvQKk"
+      "id": "bAbvlqAvQKk",
+      "bookCode": "BOOK-0001"
     },
     {
       "title": "Harry Potter",
-      "author": "J.K rowling",
+      "author": "J.K. Rowling",
+      "description": "Bộ tiểu thuyết huyền bí về cậu bé phù thủy Harry Potter và cuộc phiêu lưu tại trường Hogwarts. Tác phẩm kinh điển của văn học thiếu nhi thế giới.",
       "categoryId": "9jyD9KeRRy8",
-      "totalCopies": 2,
-      "availableCopies": 2,
+      "totalCopies": 1,
+      "availableCopies": 1,
       "coverImage": "images/harrypotter.jpg",
-      "id": "7238E7u3ZaY"
+      "id": "7238E7u3ZaY",
+      "bookCode": "BOOK-0002"
     },
     {
-      "title": "Nicomachean ethics",
+      "title": "Nicomachean Ethics",
       "author": "Aristotle",
+      "description": "Tác phẩm triết học nền tảng của Aristotle bàn về đạo đức, hạnh phúc và đức hạnh. Là tài liệu tham khảo quan trọng cho sinh viên triết học.",
       "categoryId": "1cJQmfTZEOw",
       "totalCopies": 10,
       "availableCopies": 10,
       "coverImage": "images/aristotle.jpg",
-      "id": "jSC_l2tvmng"
+      "id": "jSC_l2tvmng",
+      "bookCode": "BOOK-0003"
     },
     {
       "title": "Grammar English",
-      "author": "John newman",
+      "author": "John Newman",
+      "description": "Giáo trình ngữ pháp tiếng Anh toàn diện, phù hợp cho sinh viên ôn luyện và nâng cao trình độ ngoại ngữ.",
       "categoryId": "PtrUSsXmb_o",
       "totalCopies": 1,
       "availableCopies": 1,
       "coverImage": "images/grammarEnglish.jpg",
-      "id": "fKTe9G3lipU"
+      "id": "fKTe9G3lipU",
+      "bookCode": "BOOK-0004"
     },
     {
-      "title": "Don quixote",
-      "author": "Don quixote",
+      "title": "Don Quixote",
+      "author": "Miguel de Cervantes",
+      "description": "Tiểu thuyết kinh điển của văn học Tây Ban Nha kể về hiệp sĩ Don Quixote và cuộc hành trình phiêu lưu đầy hài hước.",
       "categoryId": "ELtDm1M0BIY",
       "totalCopies": 3,
-      "availableCopies": 2,
+      "availableCopies": 3,
       "coverImage": "images/donquixote.jpg",
-      "id": "5mIaj8cV6tQ"
+      "id": "5mIaj8cV6tQ",
+      "bookCode": "BOOK-0005"
     },
     {
       "title": "The Vanishing",
       "author": "Jakobsen",
+      "description": "Tiểu thuyết ly kỳ hấp dẫn về sự mất tích bí ẩn, đan xen giữa tâm lý và trinh thám.",
       "categoryId": "ELtDm1M0BIY",
       "totalCopies": 5,
       "availableCopies": 5,
       "coverImage": "images/thevanishing.jpg",
-      "id": "BNdGtKFmzsM"
+      "id": "BNdGtKFmzsM",
+      "bookCode": "BOOK-0006"
     },
     {
-      "title": "Data Analysis",
-      "author": "Pandas",
+      "title": "Data Analysis with Python",
+      "author": "Wes McKinney",
+      "description": "Hướng dẫn phân tích dữ liệu bằng Python với thư viện Pandas. Tài liệu tham khảo hữu ích cho sinh viên ngành CNTT và Khoa học dữ liệu.",
       "categoryId": "4zziuUP2Gb4",
       "totalCopies": 1,
       "availableCopies": 1,
       "coverImage": "images/dataanalysis.jpg",
-      "id": "Z8TnpmAdqH8"
+      "id": "Z8TnpmAdqH8",
+      "bookCode": "BOOK-0007"
     },
     {
       "title": "Reinforcement Learning",
       "author": "Richard S. Sutton",
+      "description": "Giáo trình nền tảng về học tăng cường — một nhánh quan trọng của trí tuệ nhân tạo. Phù hợp cho sinh viên và giảng viên ngành AI.",
       "categoryId": "4zziuUP2Gb4",
       "totalCopies": 3,
-      "availableCopies": 3,
+      "availableCopies": 4,
       "coverImage": "images/reinforcement.jpg",
-      "id": "book_rl"
+      "id": "book_rl",
+      "bookCode": "BOOK-0008"
     },
     {
       "title": "Atomic Habits",
       "author": "James Clear",
+      "description": "Phương pháp xây dựng thói quen tốt và loại bỏ thói quen xấu. Giúp sinh viên cải thiện kỹ năng quản lý thời gian và học tập hiệu quả.",
       "categoryId": "cat_skills",
       "totalCopies": 5,
-      "availableCopies": 3,
+      "availableCopies": 4,
       "coverImage": "images/lifeofpi.jpg",
-      "id": "book_habits"
+      "id": "book_habits",
+      "bookCode": "BOOK-0009"
     },
     {
       "title": "Nhà giả kim",
       "author": "Paulo Coelho",
+      "description": "Câu chuyện về hành trình đi tìm kho báu của chàng chăn cừu Santiago. Một tác phẩm truyền cảm hứng về ước mơ và lý tưởng sống.",
       "categoryId": "P6tsMqHYrQA",
       "totalCopies": 4,
       "availableCopies": 3,
       "coverImage": "images/donquixote.jpg",
-      "id": "book_alchemist"
+      "id": "book_alchemist",
+      "bookCode": "BOOK-0010"
     },
     {
       "title": "Đắc Nhân Tâm",
       "author": "Dale Carnegie",
+      "description": "Cuốn sách kinh điển về nghệ thuật giao tiếp và ứng xử. Giúp sinh viên phát triển kỹ năng mềm và xây dựng mối quan hệ.",
       "categoryId": "JL3rvnyetYY",
       "totalCopies": 5,
       "availableCopies": 5,
       "coverImage": "images/aristotle.jpg",
-      "id": "book_carnegie"
+      "id": "book_carnegie",
+      "bookCode": "BOOK-0011"
     },
     {
       "title": "Sapiens: Lược sử loài người",
       "author": "Yuval Noah Harari",
+      "description": "Tổng quan lịch sử nhân loại từ thời tiền sử đến hiện đại. Tài liệu bổ ích cho sinh viên các ngành xã hội và nhân văn.",
       "categoryId": "cat_history",
       "totalCopies": 2,
       "availableCopies": 2,
       "coverImage": "images/aristotle.jpg",
-      "id": "book_sapiens"
+      "id": "book_sapiens",
+      "bookCode": "BOOK-0012"
+    },
+    {
+      "bookCode": "BOOK-0013",
+      "title": "Sach The Thao",
+      "author": "SportBook",
+      "categoryId": "P6tsMqHYrQA",
+      "totalCopies": 1,
+      "availableCopies": 1,
+      "coverImage": "",
+      "id": "mmHnXfD4jFc"
     }
   ],
   "reviews": [
@@ -226,7 +267,7 @@
       "bookId": "bAbvlqAvQKk",
       "memberId": "utVRM5U35gA",
       "rating": 4,
-      "comment": "Kha hay\n",
+      "comment": "Khá hay",
       "createdAt": "2026-07-15T15:02:36.960Z",
       "id": "RH-KMN7D4HU"
     }
@@ -234,6 +275,11 @@
   "members": [
     {
       "userId": "DspmOC9F1k4",
+      "memberType": "student",
+      "studentId": "SE1701",
+      "className": "SE1809",
+      "major": "Kỹ thuật phần mềm",
+      "enrollmentYear": 2023,
       "phone": "0356965077",
       "gender": "Nam",
       "dob": "2005-03-03",
@@ -247,6 +293,11 @@
     },
     {
       "userId": "user_member_2",
+      "memberType": "student",
+      "studentId": "SE1802",
+      "className": "SE1810",
+      "major": "Kỹ thuật phần mềm",
+      "enrollmentYear": 2022,
       "phone": "0912345678",
       "gender": "Nam",
       "dob": "1999-01-01",
@@ -255,10 +306,18 @@
       "favorites": [
         "Văn học"
       ],
-      "id": "member_an"
+      "id": "member_an",
+      "borrowingStatus": "active",
+      "unpaidFineAmount": 0,
+      "blockedReason": ""
     },
     {
       "userId": "user_member_3",
+      "memberType": "student",
+      "studentId": "SE1903",
+      "className": "SE1811",
+      "major": "An toàn thông tin",
+      "enrollmentYear": 2023,
       "phone": "0987654321",
       "gender": "Nữ",
       "dob": "2001-12-15",
@@ -272,9 +331,13 @@
     },
     {
       "userId": "user_member_4",
+      "memberType": "teacher",
+      "department": "Khoa Công nghệ thông tin",
+      "major": "Trí tuệ nhân tạo",
+      "position": "Giảng viên",
       "phone": "0905556677",
       "gender": "Nam",
-      "dob": "1998-07-20",
+      "dob": "1985-07-20",
       "city": "Hải Phòng",
       "address": "Ngô Quyền",
       "favorites": [
@@ -285,23 +348,50 @@
     },
     {
       "userId": "tfFUE7Ix1v4",
+      "memberType": "teacher",
+      "department": "Khoa Kinh tế",
+      "major": "Quản trị kinh doanh",
+      "position": "Phó Giáo sư",
       "phone": "0987654325",
       "gender": "Nam",
-      "dob": "2003-10-10",
+      "dob": "1980-10-10",
       "city": "Hà Nội",
-      "address": "Thon1",
+      "address": "Cầu Giấy",
       "favorites": [],
       "id": "EXzmfwwL9Bg"
     },
     {
       "userId": "jreJQae2q98",
+      "memberType": "student",
+      "studentId": "SE2004",
+      "className": "SE1812",
+      "major": "Kỹ thuật phần mềm",
+      "enrollmentYear": 2024,
       "phone": "0123234555",
       "gender": "Nam",
       "dob": "2003-03-03",
       "city": "Hà Nội",
-      "address": "thon 1",
+      "address": "Thanh Xuân",
       "favorites": [],
       "id": "VQtOMhYsrh4"
+    },
+    {
+      "userId": "-j-EG1M3XZo",
+      "phone": "0998740521",
+      "gender": "Nam",
+      "dob": "2026-07-22",
+      "city": "Hà Nội",
+      "address": "",
+      "favorites": [],
+      "memberType": "student",
+      "major": "KTPM",
+      "studentId": "HE191544",
+      "className": "SE2014",
+      "enrollmentYear": 2024,
+      "borrowingStatus": "blocked",
+      "unpaidFineAmount": 150000,
+      "blockedReason": "Còn phí phạt chưa thanh toán",
+      "id": "uNk39aw9OUk"
     }
   ],
   "borrowRecords": [
@@ -337,18 +427,28 @@
       "memberId": "utVRM5U35gA",
       "dueDate": "2026-07-30",
       "borrowDate": "2026-07-16",
-      "returnDate": null,
-      "status": "borrowed",
-      "id": "l82k3BNM7UQ"
+      "returnDate": "2026-07-23",
+      "status": "returned",
+      "id": "l82k3BNM7UQ",
+      "copyId": "5mIaj8cV6tQ_copy_01",
+      "returnCondition": "normal",
+      "fineAmount": 0,
+      "overdueDays": 0,
+      "returnNote": ""
     },
     {
       "bookId": "7238E7u3ZaY",
       "memberId": "member_an",
       "dueDate": "2026-07-24",
       "borrowDate": "2026-07-10",
-      "returnDate": null,
-      "status": "borrowed",
-      "id": "rec_an_1"
+      "returnDate": "2026-07-23",
+      "status": "damaged_returned",
+      "id": "rec_an_1",
+      "copyId": "7238E7u3ZaY_copy_01",
+      "returnCondition": "damaged",
+      "fineAmount": 50000,
+      "overdueDays": 0,
+      "returnNote": "Rách sách"
     },
     {
       "bookId": "jSC_l2tvmng",
@@ -362,11 +462,17 @@
     {
       "bookId": "book_rl",
       "memberId": "member_chi",
-      "dueDate": "2026-07-26",
+      "dueDate": "2026-08-02",
       "borrowDate": "2026-07-12",
-      "returnDate": null,
-      "status": "borrowed",
-      "id": "rec_chi_1"
+      "returnDate": "2026-07-23",
+      "status": "returned",
+      "id": "rec_chi_1",
+      "copyId": "book_rl_copy_01",
+      "renewalCount": 1,
+      "returnCondition": "normal",
+      "fineAmount": 0,
+      "overdueDays": 0,
+      "returnNote": ""
     },
     {
       "bookId": "BNdGtKFmzsM",
@@ -382,9 +488,14 @@
       "memberId": "member_binh",
       "dueDate": "2026-07-30",
       "borrowDate": "2026-07-16",
-      "returnDate": null,
-      "status": "borrowed",
-      "id": "rec_binh_1"
+      "returnDate": "2026-07-23",
+      "status": "returned",
+      "id": "rec_binh_1",
+      "copyId": "book_habits_copy_01",
+      "returnCondition": "normal",
+      "fineAmount": 0,
+      "overdueDays": 0,
+      "returnNote": ""
     },
     {
       "bookId": "book_alchemist",
@@ -400,9 +511,14 @@
       "memberId": "utVRM5U35gA",
       "dueDate": "2026-07-30",
       "borrowDate": "2026-07-16",
-      "returnDate": null,
-      "status": "borrowed",
-      "id": "gpqRyu-CeXs"
+      "returnDate": "2026-07-23",
+      "status": "returned",
+      "id": "gpqRyu-CeXs",
+      "copyId": "bAbvlqAvQKk_copy_01",
+      "returnCondition": "normal",
+      "fineAmount": 0,
+      "overdueDays": 0,
+      "returnNote": ""
     },
     {
       "bookId": "Z8TnpmAdqH8",
@@ -436,9 +552,44 @@
       "memberId": "member_chi",
       "dueDate": "2026-07-30",
       "borrowDate": "2026-07-16",
-      "returnDate": null,
-      "status": "borrowed",
-      "id": "6dUA77WhnhM"
+      "returnDate": "2026-07-23",
+      "status": "returned",
+      "id": "6dUA77WhnhM",
+      "copyId": "bAbvlqAvQKk_copy_02",
+      "returnCondition": "normal",
+      "fineAmount": 0,
+      "overdueDays": 0,
+      "returnNote": ""
+    },
+    {
+      "bookId": "7238E7u3ZaY",
+      "memberId": "utVRM5U35gA",
+      "dueDate": "2026-08-06",
+      "borrowDate": "2026-07-23",
+      "returnDate": "2026-07-23",
+      "status": "returned",
+      "copyId": "7238E7u3ZaY_copy_02",
+      "renewalCount": 0,
+      "returnCondition": "normal",
+      "fineAmount": 0,
+      "id": "Dh3q-wgm-5w",
+      "overdueDays": 0,
+      "returnNote": ""
+    },
+    {
+      "bookId": "7238E7u3ZaY",
+      "memberId": "uNk39aw9OUk",
+      "dueDate": "2026-08-06",
+      "borrowDate": "2026-07-23",
+      "returnDate": "2026-07-23",
+      "status": "lost",
+      "copyId": "7238E7u3ZaY_copy_02",
+      "renewalCount": 0,
+      "returnCondition": "lost",
+      "fineAmount": 150000,
+      "id": "RJneylUOXVE",
+      "overdueDays": 0,
+      "returnNote": "Mất sách"
     }
   ],
   "bookSuggestions": [
@@ -489,6 +640,511 @@
       "reviewedAt": "2026-07-16",
       "librarianNote": "",
       "id": "sgg_clean_code"
+    }
+  ],
+  "bookCopies": [
+    {
+      "id": "bAbvlqAvQKk_copy_01",
+      "bookId": "bAbvlqAvQKk",
+      "copyCode": "BOOK-0001-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23",
+      "borrowedAt": "2026-07-16",
+      "returnedAt": "2026-07-23"
+    },
+    {
+      "id": "bAbvlqAvQKk_copy_02",
+      "bookId": "bAbvlqAvQKk",
+      "copyCode": "BOOK-0001-C02",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23",
+      "borrowedAt": "2026-07-16",
+      "returnedAt": "2026-07-23"
+    },
+    {
+      "id": "bAbvlqAvQKk_copy_03",
+      "bookId": "bAbvlqAvQKk",
+      "copyCode": "BOOK-0001-C03",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "bAbvlqAvQKk_copy_04",
+      "bookId": "bAbvlqAvQKk",
+      "copyCode": "BOOK-0001-C04",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "7238E7u3ZaY_copy_01",
+      "bookId": "7238E7u3ZaY",
+      "copyCode": "BOOK-0002-C01",
+      "status": "damaged",
+      "condition": "damaged",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23",
+      "borrowedAt": "2026-07-10",
+      "returnedAt": "2026-07-23"
+    },
+    {
+      "id": "7238E7u3ZaY_copy_02",
+      "bookId": "7238E7u3ZaY",
+      "copyCode": "BOOK-0002-C02",
+      "status": "lost",
+      "condition": "lost",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23",
+      "borrowedAt": "2026-07-23",
+      "returnedAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_01",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_02",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C02",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_03",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C03",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_04",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C04",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_05",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C05",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_06",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C06",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_07",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C07",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_08",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C08",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_09",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C09",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "jSC_l2tvmng_copy_10",
+      "bookId": "jSC_l2tvmng",
+      "copyCode": "BOOK-0003-C10",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "fKTe9G3lipU_copy_01",
+      "bookId": "fKTe9G3lipU",
+      "copyCode": "BOOK-0004-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "5mIaj8cV6tQ_copy_01",
+      "bookId": "5mIaj8cV6tQ",
+      "copyCode": "BOOK-0005-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23",
+      "borrowedAt": "2026-07-16",
+      "returnedAt": "2026-07-23"
+    },
+    {
+      "id": "5mIaj8cV6tQ_copy_02",
+      "bookId": "5mIaj8cV6tQ",
+      "copyCode": "BOOK-0005-C02",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "5mIaj8cV6tQ_copy_03",
+      "bookId": "5mIaj8cV6tQ",
+      "copyCode": "BOOK-0005-C03",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "BNdGtKFmzsM_copy_01",
+      "bookId": "BNdGtKFmzsM",
+      "copyCode": "BOOK-0006-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "BNdGtKFmzsM_copy_02",
+      "bookId": "BNdGtKFmzsM",
+      "copyCode": "BOOK-0006-C02",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "BNdGtKFmzsM_copy_03",
+      "bookId": "BNdGtKFmzsM",
+      "copyCode": "BOOK-0006-C03",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "BNdGtKFmzsM_copy_04",
+      "bookId": "BNdGtKFmzsM",
+      "copyCode": "BOOK-0006-C04",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "BNdGtKFmzsM_copy_05",
+      "bookId": "BNdGtKFmzsM",
+      "copyCode": "BOOK-0006-C05",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "Z8TnpmAdqH8_copy_01",
+      "bookId": "Z8TnpmAdqH8",
+      "copyCode": "BOOK-0007-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_rl_copy_01",
+      "bookId": "book_rl",
+      "copyCode": "BOOK-0008-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23",
+      "borrowedAt": "2026-07-12",
+      "returnedAt": "2026-07-23"
+    },
+    {
+      "id": "book_rl_copy_02",
+      "bookId": "book_rl",
+      "copyCode": "BOOK-0008-C02",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_rl_copy_03",
+      "bookId": "book_rl",
+      "copyCode": "BOOK-0008-C03",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_habits_copy_01",
+      "bookId": "book_habits",
+      "copyCode": "BOOK-0009-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23",
+      "borrowedAt": "2026-07-16",
+      "returnedAt": "2026-07-23"
+    },
+    {
+      "id": "book_habits_copy_02",
+      "bookId": "book_habits",
+      "copyCode": "BOOK-0009-C02",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_habits_copy_03",
+      "bookId": "book_habits",
+      "copyCode": "BOOK-0009-C03",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_habits_copy_04",
+      "bookId": "book_habits",
+      "copyCode": "BOOK-0009-C04",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_habits_copy_05",
+      "bookId": "book_habits",
+      "copyCode": "BOOK-0009-C05",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_alchemist_copy_01",
+      "bookId": "book_alchemist",
+      "copyCode": "BOOK-0010-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_alchemist_copy_02",
+      "bookId": "book_alchemist",
+      "copyCode": "BOOK-0010-C02",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_alchemist_copy_03",
+      "bookId": "book_alchemist",
+      "copyCode": "BOOK-0010-C03",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_alchemist_copy_04",
+      "bookId": "book_alchemist",
+      "copyCode": "BOOK-0010-C04",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_carnegie_copy_01",
+      "bookId": "book_carnegie",
+      "copyCode": "BOOK-0011-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_carnegie_copy_02",
+      "bookId": "book_carnegie",
+      "copyCode": "BOOK-0011-C02",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_carnegie_copy_03",
+      "bookId": "book_carnegie",
+      "copyCode": "BOOK-0011-C03",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_carnegie_copy_04",
+      "bookId": "book_carnegie",
+      "copyCode": "BOOK-0011-C04",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_carnegie_copy_05",
+      "bookId": "book_carnegie",
+      "copyCode": "BOOK-0011-C05",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_sapiens_copy_01",
+      "bookId": "book_sapiens",
+      "copyCode": "BOOK-0012-C01",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    },
+    {
+      "id": "book_sapiens_copy_02",
+      "bookId": "book_sapiens",
+      "copyCode": "BOOK-0012-C02",
+      "status": "available",
+      "condition": "good",
+      "currentBorrowRecordId": null,
+      "createdAt": "2026-07-23"
+    }
+  ],
+  "fines": [
+    {
+      "memberId": "member_an",
+      "borrowRecordId": "rec_an_1",
+      "bookId": "7238E7u3ZaY",
+      "type": "damaged",
+      "amount": 50000,
+      "note": "Rách sách",
+      "daysOverdue": 0,
+      "status": "paid",
+      "createdAt": "2026-07-23",
+      "paidAt": "2026-07-23",
+      "id": "F3pW0dtrB3g"
+    },
+    {
+      "memberId": "uNk39aw9OUk",
+      "borrowRecordId": "RJneylUOXVE",
+      "bookId": "7238E7u3ZaY",
+      "type": "lost",
+      "amount": 150000,
+      "note": "Mất sách",
+      "daysOverdue": 0,
+      "status": "unpaid",
+      "createdAt": "2026-07-23",
+      "paidAt": null,
+      "id": "Hly15kJBIjQ"
+    }
+  ],
+  "notifications": [
+    {
+      "memberId": "member_an",
+      "title": "Phát sinh phí phạt thư viện",
+      "message": "Bạn có khoản phạt 50.000đ. Vui lòng thanh toán để được mượn sách tiếp.",
+      "type": "fine",
+      "read": false,
+      "createdAt": "2026-07-23",
+      "id": "c85bOGK24hY"
+    },
+    {
+      "memberId": "utVRM5U35gA",
+      "title": "Yêu cầu mượn sách đã được duyệt",
+      "message": "Bạn đã được duyệt mượn \"Harry Potter\". Hạn trả: 2026-08-06.",
+      "type": "borrow_approved",
+      "read": false,
+      "createdAt": "2026-07-23",
+      "id": "bn9CWgYN-Kg"
+    },
+    {
+      "memberId": "member_chi",
+      "title": "Phiếu mượn đã được gia hạn",
+      "message": "Hạn trả mới của bạn là 2026-08-02.",
+      "type": "renewal",
+      "read": false,
+      "createdAt": "2026-07-23",
+      "id": "uTjqha1OdBw"
+    },
+    {
+      "memberId": "member_an",
+      "title": "Tài khoản mượn sách đã hoạt động lại",
+      "message": "Bạn đã thanh toán hết phí phạt và có thể tiếp tục đăng ký mượn sách.",
+      "type": "fine_paid",
+      "read": false,
+      "createdAt": "2026-07-23",
+      "id": "wtwSRPLG_KU"
+    },
+    {
+      "memberId": "uNk39aw9OUk",
+      "title": "Yêu cầu mượn sách đã được duyệt",
+      "message": "Bạn đã được duyệt mượn \"Harry Potter\". Hạn trả: 2026-08-06.",
+      "type": "borrow_approved",
+      "read": false,
+      "createdAt": "2026-07-23",
+      "id": "B7uGQS9zVmU"
+    },
+    {
+      "memberId": "uNk39aw9OUk",
+      "title": "Phát sinh phí phạt thư viện",
+      "message": "Bạn có khoản phạt 150.000đ. Vui lòng thanh toán để được mượn sách tiếp.",
+      "type": "fine",
+      "read": false,
+      "createdAt": "2026-07-23",
+      "id": "U_BwpKK_5dc"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
