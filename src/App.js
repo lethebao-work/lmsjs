@@ -11,14 +11,16 @@ import HomePage from './pages/HomePage';
 import BooksPage from './pages/BooksPage';
 import BookDetailPage from './pages/BookDetailPage';
 import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
+import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import MyBorrowRecordsPage from './pages/MyBorrowRecordsPage';
+import MyFinesPage from './pages/member/MyFinesPage';
 import ProfilePage from './pages/ProfilePage';
 
 const LibrarianBooksPage = lazy(() => import('./pages/librarian/LibrarianBooksPage'));
 const LibrarianCategoriesPage = lazy(() => import('./pages/librarian/LibrarianCategoriesPage'));
 const LibrarianMembersPage = lazy(() => import('./pages/librarian/LibrarianMembersPage'));
 const LibrarianBorrowRecordsPage = lazy(() => import('./pages/librarian/LibrarianBorrowRecordsPage'));
+const LibrarianFinesPage = lazy(() => import('./pages/librarian/LibrarianFinesPage'));
 const LibrarianBookSuggestionsPage = lazy(() => import('./pages/librarian/LibrarianBookSuggestionsPage'));
 const LibrarianDashboard = lazy(() => import('./pages/librarian/LibrarianDashboard'));
 const MemberDashboard = lazy(() => import('./pages/member/MemberDashboard'));
@@ -37,12 +39,15 @@ function App() {
                 <Route path="/books" element={<BooksPage />} />
                 <Route path="/books/:id" element={<BookDetailPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/forgot-password" element={<ForgotPasswordPage />} />
                 <Route path="/dashboard" element={
                   <ProtectedRoute><MemberDashboard /></ProtectedRoute>
                 } />
                 <Route path="/my-borrow-records" element={
                   <ProtectedRoute><MyBorrowRecordsPage /></ProtectedRoute>
+                } />
+                <Route path="/my-fines" element={
+                  <ProtectedRoute><MyFinesPage /></ProtectedRoute>
                 } />
                 <Route path="/book-suggestions" element={
                   <ProtectedRoute><BookSuggestionPage /></ProtectedRoute>
@@ -64,6 +69,9 @@ function App() {
                 } />
                 <Route path="/librarian/borrow-records" element={
                   <ProtectedRoute requireLibrarian><LibrarianBorrowRecordsPage /></ProtectedRoute>
+                } />
+                <Route path="/librarian/fines" element={
+                  <ProtectedRoute requireLibrarian><LibrarianFinesPage /></ProtectedRoute>
                 } />
                 <Route path="/librarian/book-suggestions" element={
                   <ProtectedRoute requireLibrarian><LibrarianBookSuggestionsPage /></ProtectedRoute>
