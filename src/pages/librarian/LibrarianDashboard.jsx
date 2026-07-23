@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Sidebar from '../../components/common/Sidebar';
 import bookService from '../../services/bookService';
 import memberService from '../../services/memberService';
@@ -11,6 +10,8 @@ export default function LibrarianDashboard() {
   const [stats, setStats] = useState({
     totalBooks: 0,
     totalMembers: 0,
+    totalStudents: 0,
+    totalTeachers: 0,
     activeBorrows: 0,
     pendingRequests: 0
   });
@@ -33,27 +34,30 @@ export default function LibrarianDashboard() {
       const pending = records.filter(r => r.status === 'pending');
       const active = records.filter(r => r.status === 'borrowed');
 
-      // Tạo map để lấy tên sách nhanh
       const bookMap = {};
       books.forEach(b => { bookMap[b.id] = b.title; });
 
-      // Tạo map để lấy tên độc giả nhanh
       const memberMap = {};
-      members.forEach(m => { memberMap[m.id] = m.name; });
+      members.forEach(m => { memberMap[m.id] = m; });
 
       setStats({
         totalBooks: books.length,
         totalMembers: members.length,
+        totalStudents: members.filter(m => m.memberType === 'student').length,
+        totalTeachers: members.filter(m => m.memberType === 'teacher').length,
         activeBorrows: active.length,
         pendingRequests: pending.length
       });
 
-      // Lấy danh sách chờ duyệt kèm chi tiết
       setPendingRecords(
         pending.map(r => ({
           ...r,
           bookTitle: bookMap[r.bookId] || 'Không xác định',
-          memberName: memberMap[r.memberId] || 'Không xác định'
+          memberName: memberMap[r.memberId]?.name || 'Không xác định',
+          memberType: memberMap[r.memberId]?.memberType || 'student',
+          memberDetail: memberMap[r.memberId]?.memberType === 'teacher' 
+            ? (memberMap[r.memberId]?.department || 'Giảng viên') 
+            : `MSSV: ${memberMap[r.memberId]?.studentId || 'N/A'}`
         }))
       );
     } catch (e) {
@@ -67,7 +71,7 @@ export default function LibrarianDashboard() {
     try {
       await borrowRecordService.approveBorrowRecord(id);
       toast.success('Duyệt mượn sách thành công!');
-      fetchData(); // Tải lại dữ liệu
+      fetchData();
     } catch (e) {
       toast.error(e.message || 'Có lỗi xảy ra!');
     }
@@ -87,12 +91,21 @@ export default function LibrarianDashboard() {
   return (
     <div className="d-flex">
       <Sidebar />
-      <div className="flex-grow-1 p-4" style={{ minHeight: 'calc(100vh - 72px)', backgroundColor: '#f8f9fa' }}>
-        <div className="container-fluid">
-          <div className="d-flex justify-content-between align-items-center mb-4">
-            <h2 className="fw-bold text-dark mb-0">Bảng điều khiển thủ thư</h2>
-            <button className="btn btn-outline-primary btn-sm" onClick={fetchData}>
-              Làm mới
+      <div className="lms-main-surface">
+        <div className="lms-dashboard-container">
+          {/* Header Command Center */}
+          <div className="lms-page-header">
+            <div>
+              <div className="d-flex align-items-center gap-2 mb-1">
+                <h2 className="lms-page-title">Trung Tâm Quản Trị Thư Viện</h2>
+                <span className="badge text-white px-3 py-1.5 rounded-pill" style={{ backgroundColor: '#8B4000' }}>
+                  <i className="bi bi-shield-check me-1"></i> Phân hệ Thủ thư
+                </span>
+              </div>
+              <p className="lms-page-subtitle">Tổng quan hệ thống, duyệt mượn trả và quản lý kho tài liệu số</p>
+            </div>
+            <button className="btn btn-outline-secondary btn-sm rounded-pill px-3" onClick={fetchData}>
+              <i className="bi bi-arrow-clockwise me-1"></i> Tải lại dữ liệu
             </button>
           </div>
 
@@ -100,109 +113,151 @@ export default function LibrarianDashboard() {
             <LoadingSpinner />
           ) : (
             <>
-              {/* Thống kê Tổng quan */}
-              <div className="row g-4 mb-4">
-                <div className="col-md-3">
-                  <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
-                    <div className="d-flex align-items-center">
-                      <div className="p-3 bg-primary bg-opacity-10 text-primary rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        Sách
-                      </div>
+              {/* Clean Minimalist Analytics 4-Card Grid */}
+              <div className="row g-3 mb-3">
+                {/* Card 1: Total Books */}
+                <div className="col-sm-6 col-xl-3">
+                  <div className="lms-kpi-card">
+                    <div className="lms-kpi-content">
                       <div>
-                        <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Tổng đầu sách</h6>
-                        <h3 className="fw-bold mb-0">{stats.totalBooks}</h3>
+                        <span className="lms-kpi-label">
+                          TỔNG SỐ SÁCH
+                        </span>
+                        <h2 className="lms-kpi-value">{stats.totalBooks}</h2>
+                        <span className="lms-kpi-note">Đầu sách trong kho</span>
+                      </div>
+                      <div 
+                        className="lms-kpi-icon" 
+                        style={{ backgroundColor: '#FFF3E0', color: '#E65100' }}
+                      >
+                        <i className="bi bi-bookshelf"></i>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="col-md-3">
-                  <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
-                    <div className="d-flex align-items-center">
-                      <div className="p-3 bg-success bg-opacity-10 text-success rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        Độc giả
-                      </div>
+                {/* Card 2: Total Members */}
+                <div className="col-sm-6 col-xl-3">
+                  <div className="lms-kpi-card">
+                    <div className="lms-kpi-content">
                       <div>
-                        <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Tổng số độc giả</h6>
-                        <h3 className="fw-bold mb-0">{stats.totalMembers}</h3>
+                        <span className="lms-kpi-label">
+                          THÀNH VIÊN HỆ THỐNG
+                        </span>
+                        <h2 className="lms-kpi-value">{stats.totalMembers}</h2>
+                        <span className="lms-kpi-note">{stats.totalStudents} SV · {stats.totalTeachers} GV</span>
+                      </div>
+                      <div 
+                        className="lms-kpi-icon" 
+                        style={{ backgroundColor: '#ECFDF5', color: '#059669' }}
+                      >
+                        <i className="bi bi-people"></i>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="col-md-3">
-                  <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
-                    <div className="d-flex align-items-center">
-                      <div className="p-3 bg-warning bg-opacity-10 text-warning rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        Mượn
-                      </div>
+                {/* Card 3: Active Borrows */}
+                <div className="col-sm-6 col-xl-3">
+                  <div className="lms-kpi-card">
+                    <div className="lms-kpi-content">
                       <div>
-                        <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Đang mượn</h6>
-                        <h3 className="fw-bold mb-0">{stats.activeBorrows}</h3>
+                        <span className="lms-kpi-label">
+                          ĐANG CHO MƯỢN
+                        </span>
+                        <h2 className="lms-kpi-value">{stats.activeBorrows}</h2>
+                        <span className="lms-kpi-note">Cuốn lưu hành</span>
+                      </div>
+                      <div 
+                        className="lms-kpi-icon" 
+                        style={{ backgroundColor: '#FEF3C7', color: '#D97706' }}
+                      >
+                        <i className="bi bi-journal-arrow-up"></i>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="col-md-3">
-                  <div className="card border-0 shadow-sm p-3 bg-white" style={{ borderRadius: '12px' }}>
-                    <div className="d-flex align-items-center">
-                      <div className="p-3 bg-danger bg-opacity-10 text-danger rounded-3 me-3" style={{ fontSize: '1.5rem' }}>
-                        Chờ
-                      </div>
+                {/* Card 4: Pending Requests */}
+                <div className="col-sm-6 col-xl-3">
+                  <div className="lms-kpi-card">
+                    <div className="lms-kpi-content">
                       <div>
-                        <h6 className="text-muted mb-1" style={{ fontSize: '0.875rem' }}>Chờ duyệt mượn</h6>
-                        <h3 className="fw-bold mb-0 text-danger">{stats.pendingRequests}</h3>
+                        <span className="lms-kpi-label">
+                          YÊU CẦU CHỜ DUYỆT
+                        </span>
+                        <h2 className="lms-kpi-value text-danger">{stats.pendingRequests}</h2>
+                        <span className="lms-kpi-note">Cần xử lý gấp</span>
+                      </div>
+                      <div 
+                        className="lms-kpi-icon" 
+                        style={{ backgroundColor: '#FEE2E2', color: '#DC2626' }}
+                      >
+                        <i className="bi bi-bell-fill"></i>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Bảng yêu cầu chờ duyệt */}
-              <div className="card border-0 shadow-sm p-4 bg-white" style={{ borderRadius: '12px' }}>
-                <h5 className="fw-bold mb-4 d-flex align-items-center gap-2">
-                  <span>Yêu cầu</span> chờ duyệt gần đây
-                </h5>
+              {/* Pending Approval Table */}
+              <div className="lms-panel">
+                <div className="d-flex align-items-center justify-content-between mb-3">
+                  <h5 className="fw-bold text-dark mb-0 d-flex align-items-center gap-2">
+                    <i className="bi bi-inbox-fill text-danger"></i> Yêu Cầu Đăng Ký Mượn Sách Chờ Phê Duyệt
+                  </h5>
+                  {stats.pendingRequests > 0 && (
+                    <span className="badge bg-danger rounded-pill px-3 py-1.5">
+                      {stats.pendingRequests} đơn mới
+                    </span>
+                  )}
+                </div>
 
                 {pendingRecords.length === 0 ? (
                   <div className="text-center py-5 text-muted">
-                    <span className="display-4 d-block mb-3">Trống</span>
-                    Hiện tại không có yêu cầu mượn sách nào cần phê duyệt!
+                    <i className="bi bi-check2-circle display-4 d-block mb-3 text-success"></i>
+                    Hiện tại không có yêu cầu mượn sách nào cần phê duyệt. Kho sách đang hoàn toàn ổn định!
                   </div>
                 ) : (
                   <div className="table-responsive">
-                    <table className="table table-hover align-middle mb-0">
-                      <thead className="table-light">
+                    <table className="table table-custom align-middle mb-0">
+                      <thead>
                         <tr>
-                          <th className="border-0 px-3 py-3">Độc giả</th>
-                          <th className="border-0 px-3 py-3">Sách yêu cầu</th>
-                          <th className="border-0 px-3 py-3 text-center">Trạng thái</th>
-                          <th className="border-0 px-3 py-3 text-end">Thao tác</th>
+                          <th>Độc giả & Đối tượng</th>
+                          <th>Mã / Khoa</th>
+                          <th>Sách Yêu Cầu</th>
+                          <th className="text-center">Trạng thái</th>
+                          <th className="text-end">Thao tác xử lý</th>
                         </tr>
                       </thead>
                       <tbody>
                         {pendingRecords.map((r) => (
                           <tr key={r.id}>
-                            <td className="px-3 py-3 fw-semibold text-dark">{r.memberName}</td>
-                            <td className="px-3 py-3">{r.bookTitle}</td>
-                            <td className="px-3 py-3 text-center">
-                              <span className="badge bg-warning text-dark py-2 px-3 fw-semibold">
-                                Chờ duyệt
+                            <td>
+                              <div className="fw-bold text-dark">{r.memberName}</div>
+                              <span className={`badge ${r.memberType === 'teacher' ? 'badge-teacher' : 'badge-student'} mt-1`}>
+                                {r.memberType === 'teacher' ? 'Giảng viên' : 'Sinh viên'}
                               </span>
                             </td>
-                            <td className="px-3 py-3 text-end">
+                            <td className="text-secondary small">{r.memberDetail}</td>
+                            <td className="fw-semibold text-dark">{r.bookTitle}</td>
+                            <td className="text-center">
+                              <span className="badge badge-pending px-3 py-1.5">
+                                <i className="bi bi-clock me-1"></i> Chờ duyệt
+                              </span>
+                            </td>
+                            <td className="text-end">
                               <button
-                                className="btn btn-success btn-sm me-2 fw-semibold px-3"
+                                className="btn btn-success btn-sm me-2 font-semibold px-3 shadow-sm"
                                 onClick={() => handleApprove(r.id)}
                               >
-                                Duyệt mượn
+                                <i className="bi bi-check-lg me-1"></i> Duyệt mượn
                               </button>
                               <button
-                                className="btn btn-outline-danger btn-sm fw-semibold px-3"
+                                className="btn btn-outline-danger btn-sm font-semibold px-3"
                                 onClick={() => handleReject(r.id)}
                               >
-                                Từ chối
+                                <i className="bi bi-x-lg me-1"></i> Từ chối
                               </button>
                             </td>
                           </tr>

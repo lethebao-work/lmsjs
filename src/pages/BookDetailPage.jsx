@@ -8,7 +8,6 @@ import reviewService from '../services/reviewService';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import LoadingSpinner from '../components/common/LoadingSpinner';
-import Sidebar from '../components/common/Sidebar';
 
 export default function BookDetailPage() {
   const { id } = useParams();
@@ -21,12 +20,21 @@ export default function BookDetailPage() {
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
   const [submittingReview, setSubmittingReview] = useState(false);
   const [hasBorrowed, setHasBorrowed] = useState(false);
+  const [borrowBlocked, setBorrowBlocked] = useState(null);
   const { user, isMember } = useAuth();
 
   useEffect(() => {
     if (user && isMember()) {
       memberService.getMemberByUserId(user.uId).then(member => {
         if (member) {
+          if (member.borrowingStatus === 'blocked') {
+            setBorrowBlocked({
+              amount: member.unpaidFineAmount || 0,
+              reason: member.blockedReason || 'Còn phí phạt chưa thanh toán'
+            });
+          } else {
+            setBorrowBlocked(null);
+          }
           borrowRecordService.getRecordsByMemberId(member.id).then(records => {
             const borrowed = records.some(r => String(r.bookId) === String(id) && (r.status === 'borrowed' || r.status === 'returned'));
             setHasBorrowed(borrowed);
@@ -53,14 +61,18 @@ export default function BookDetailPage() {
       return;
     }
 
-    const confirm = window.confirm(`Bạn có muốn gửi yêu cầu đăng ký mượn cuốn sách này không?`);
+    const confirm = window.confirm(`Bạn có muốn gửi yêu cầu đăng ký mượn cuốn sách "${book.title}" không?`);
     if (!confirm) return;
 
     setRequesting(true);
     try {
       const member = await memberService.getMemberByUserId(user.uId);
       if (!member) {
-        toast.error('Không tìm thấy thông tin độc giả liên kết với tài khoản này!');
+        toast.error('Không tìm thấy thông tin thành viên liên kết với tài khoản này!');
+        return;
+      }
+      if (member.borrowingStatus === 'blocked') {
+        toast.error(`Bạn còn ${Number(member.unpaidFineAmount || 0).toLocaleString('vi-VN')}đ phí phạt chưa thanh toán nên chưa thể mượn sách mới.`);
         return;
       }
 
@@ -74,8 +86,6 @@ export default function BookDetailPage() {
       navigate('/my-borrow-records');
     } catch (e) {
       toast.error(e.message || 'Có lỗi xảy ra!');
-    } finally {
-      setRequesting(false);
     }
   };
 
@@ -92,7 +102,7 @@ export default function BookDetailPage() {
     try {
       const member = await memberService.getMemberByUserId(user.uId);
       if (!member) {
-        toast.error('Không tìm thấy thông tin độc giả liên kết với tài khoản này!');
+        toast.error('Không tìm thấy thông tin độc giả!');
         return;
       }
 
@@ -103,7 +113,6 @@ export default function BookDetailPage() {
         comment: reviewForm.comment
       });
       
-      // Hiển thị ngay (thêm thông tin member giả định)
       newReview.member = member;
       setReviews([newReview, ...reviews]);
       setReviewForm({ rating: 5, comment: '' });
@@ -116,135 +125,211 @@ export default function BookDetailPage() {
   };
 
   if (loading) return <LoadingSpinner />;
-  if (!book) return <p className="alert alert-danger">Không tìm thấy sách!</p>;
+  if (!book) return <div className="container mt-5"><p className="alert alert-danger">Không tìm thấy sách!</p></div>;
 
   const category = categories.find(c => String(c.id) === String(book.categoryId));
   const isAvailable = book.availableCopies > 0;
-  const avgRating = reviews.length > 0 
-    ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1) 
-    : 0;
 
   return (
-    <div className="d-flex">
-      <Sidebar />
-      <div className="flex-grow-1 p-4">
-        <div className="card shadow-sm p-4">
-          <div className="row">
-            <div className="col-md-3 mb-3 mb-md-0">
-              <img src={
-                book.coverImage 
-                  ? (book.coverImage.startsWith('http') || book.coverImage.startsWith('/') ? book.coverImage : `/${book.coverImage}`) 
-                  : 'https://via.placeholder.com/200x280?text=No+Image'
-              }
-                alt={book.title} className="img-fluid rounded shadow-sm" 
-                style={{ maxHeight: '300px', objectFit: 'contain', backgroundColor: '#f8f9fa', width: '100%' }} />
+    <div className="container-fluid px-4 py-5" style={{ maxWidth: '1200px' }}>
+      {/* Floating Single Book Detail Card matching screenshot 2 */}
+      <div className="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white mb-5">
+        <div className="row g-4 align-items-stretch">
+          {/* Left Column: Cover Frame */}
+          <div className="col-md-4 text-center d-flex align-items-center justify-content-center">
+            <div 
+              className="p-3 bg-light rounded-4 border w-100 d-flex align-items-center justify-content-center"
+              style={{ minHeight: '360px', backgroundColor: '#FAF9F6' }}
+            >
+              <img 
+                src={
+                  book.coverImage 
+                    ? (book.coverImage.startsWith('http') || book.coverImage.startsWith('/') ? book.coverImage : `/${book.coverImage}`) 
+                    : 'https://via.placeholder.com/260x360?text=No+Cover'
+                }
+                alt={book.title} 
+                className="img-fluid rounded-3 shadow-sm"
+                style={{ maxHeight: '340px', objectFit: 'contain' }}
+                onError={(e) => { e.target.src = 'https://via.placeholder.com/260x360?text=No+Cover'; }}
+              />
             </div>
-            <div className="col-md-9">
-              <h2>{book.title}</h2>
-              <p><strong>Tác giả:</strong> {book.author}</p>
-              <p><strong>Thể loại:</strong> {category?.name || '—'}</p>
-              <p>
-                <strong>Đánh giá: </strong> 
-                <span style={{ color: '#ffc107', fontSize: '1.2rem' }}>
-                  {'★'.repeat(Math.round(avgRating))}{'☆'.repeat(5 - Math.round(avgRating))}
-                </span>
-                <span className="ms-2">({avgRating}/5 từ {reviews.length} đánh giá)</span>
-              </p>
-              <p>
-                <strong>Tình trạng: </strong>
-                <span className={isAvailable ? 'text-success fw-bold' : 'text-danger fw-bold'}>
-                  {book.availableCopies}/{book.totalCopies}
-                </span>
-              </p>
-              
-              <div className="d-flex gap-2 mt-4">
-                <button className="btn btn-secondary" onClick={() => navigate('/books')}>← Quay lại</button>
-                {isMember() && (
-                  <button 
-                    className="btn btn-primary px-4 fw-semibold" 
-                    onClick={handleBorrowRequest}
-                    disabled={requesting || !isAvailable}
+          </div>
+
+          {/* Right Column: Book Metadata Grid matching screenshot 2 */}
+          <div className="col-md-8 d-flex flex-column justify-content-between">
+            <div>
+              {/* Top status bar & document code */}
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                {isAvailable ? (
+                  <span 
+                    className="badge rounded-pill px-3 py-1.5 fw-semibold d-flex align-items-center gap-1"
+                    style={{ backgroundColor: '#ECFDF5', color: '#059669', fontSize: '0.85rem' }}
                   >
-                    {requesting ? 'Đang gửi yêu cầu...' : 'Đăng ký mượn sách'}
-                  </button>
+                    <i className="bi bi-check-circle me-1"></i> Còn sách ({book.availableCopies}/{book.totalCopies})
+                  </span>
+                ) : (
+                  <span 
+                    className="badge rounded-pill px-3 py-1.5 fw-semibold d-flex align-items-center gap-1"
+                    style={{ backgroundColor: '#FEE2E2', color: '#DC2626', fontSize: '0.85rem' }}
+                  >
+                    <i className="bi bi-x-circle me-1"></i> Tạm hết sách (0/{book.totalCopies})
+                  </span>
+                )}
+                <span className="text-muted small fw-semibold">
+                  Mã tài liệu: <strong>{book.bookCode || book.id}</strong>
+                </span>
+              </div>
+
+              {/* Title */}
+              <h1 className="fw-extrabold text-dark mb-2" style={{ fontSize: '2rem', letterSpacing: '-0.02em' }}>
+                {book.title}
+              </h1>
+
+              {/* Author in brown text matching screenshot 2 */}
+              <h6 className="mb-3 d-flex align-items-center gap-2" style={{ color: '#8B4000', fontSize: '1.1rem' }}>
+                <i className="bi bi-journal-text"></i> Tác giả: <strong className="fw-bold">{book.author}</strong>
+              </h6>
+
+              {/* Category Pills matching screenshot 2 */}
+              <div className="d-flex flex-wrap gap-2 mb-4">
+                {category && (
+                  <span className="badge rounded-pill px-3 py-1.5 font-semibold text-white" style={{ backgroundColor: '#F97316' }}>
+                    <i className="bi bi-folder me-1"></i>{category.name}
+                  </span>
+                )}
+                <span className="badge rounded-pill px-3 py-1.5 font-semibold text-white" style={{ backgroundColor: '#3B82F6' }}>
+                  #Chuyên_Ngành
+                </span>
+              </div>
+
+              <hr className="my-3 text-muted opacity-25" />
+
+              {/* Metadata 2x2 Grid matching screenshot 2 */}
+              <div className="row g-3 mb-4">
+                <div className="col-6 col-sm-3">
+                  <span className="text-muted text-uppercase fw-bold d-block mb-1" style={{ fontSize: '0.725rem', letterSpacing: '0.05em' }}>
+                    NHÀ XUẤT BẢN
+                  </span>
+                  <span className="fw-semibold text-dark" style={{ fontSize: '0.925rem' }}>Pearson Academic</span>
+                </div>
+                <div className="col-6 col-sm-3">
+                  <span className="text-muted text-uppercase fw-bold d-block mb-1" style={{ fontSize: '0.725rem', letterSpacing: '0.05em' }}>
+                    NĂM XUẤT BẢN
+                  </span>
+                  <span className="fw-semibold text-dark" style={{ fontSize: '0.925rem' }}>2023</span>
+                </div>
+                <div className="col-6 col-sm-3">
+                  <span className="text-muted text-uppercase fw-bold d-block mb-1" style={{ fontSize: '0.725rem', letterSpacing: '0.05em' }}>
+                    MÃ ISBN
+                  </span>
+                  <span className="fw-semibold text-dark" style={{ fontSize: '0.925rem' }}>9781492079361</span>
+                </div>
+                <div className="col-6 col-sm-3">
+                  <span className="text-muted text-uppercase fw-bold d-block mb-1" style={{ fontSize: '0.725rem', letterSpacing: '0.05em' }}>
+                    SỐ LƯỢNG KHẢ DỤNG
+                  </span>
+                  <span className="fw-semibold text-dark" style={{ fontSize: '0.925rem' }}>{book.availableCopies} / {book.totalCopies}</span>
+                </div>
+              </div>
+
+              {/* Book description if available */}
+              {book.description && (
+                <div className="p-3 bg-light rounded-3 border mb-4">
+                  <span className="fw-bold text-secondary d-block mb-1 small">Mô tả tóm tắt:</span>
+                  <p className="mb-0 text-dark small leading-relaxed">{book.description}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Action Bar matching screenshot 2 */}
+            <div className="pt-3 border-top d-flex flex-wrap align-items-center justify-content-between gap-3">
+              <div className="flex-grow-1">
+                {isMember() ? (
+                  <>
+                    {borrowBlocked && (
+                      <div className="alert alert-danger py-2 small mb-3">
+                        Tài khoản đang tạm khóa quyền mượn do còn {Number(borrowBlocked.amount || 0).toLocaleString('vi-VN')}đ phí phạt chưa thanh toán.
+                      </div>
+                    )}
+                    <button
+                      className="btn btn-brown px-4 py-2.5 font-bold text-white shadow-sm d-flex align-items-center gap-2"
+                      onClick={handleBorrowRequest}
+                      disabled={requesting || !isAvailable || !!borrowBlocked}
+                      style={{ backgroundColor: '#8B4000' }}
+                    >
+                      <i className="bi bi-journal-check fs-5"></i>
+                      {requesting ? 'Đang gửi yêu cầu...' : (borrowBlocked ? 'Tạm khóa mượn sách' : (isAvailable ? 'Đăng ký mượn sách ngay' : 'Tạm hết sách'))}
+                    </button>
+                  </>
+                ) : (
+                  <div className="p-2.5 px-3 bg-light rounded-3 border small text-muted d-flex align-items-center gap-2">
+                    <i className="bi bi-info-circle-fill text-secondary fs-6"></i>
+                    <span>Tính năng đặt mượn sách trực tuyến chỉ dành cho Độc giả.</span>
+                  </div>
                 )}
               </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Khung Bình luận & Đánh giá */}
-        <div className="card shadow-sm p-4 mt-4">
-          <h4 className="mb-4">Đánh giá & Bình luận</h4>
-          
-          {isMember() ? (
-            hasBorrowed ? (
-              <form onSubmit={handleSubmitReview} className="mb-5 border-bottom pb-4">
-              <div className="d-flex align-items-center mb-3">
-                <label className="form-label fw-bold me-3 mb-0">Chấm điểm:</label>
-                <div style={{ fontSize: '1.5rem', cursor: 'pointer', userSelect: 'none' }}>
-                  {[1, 2, 3, 4, 5].map(star => (
-                    <span 
-                      key={star}
-                      style={{ color: star <= reviewForm.rating ? '#ffc107' : '#e4e5e9' }}
-                      onClick={() => setReviewForm({...reviewForm, rating: star})}
-                    >
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <span className="ms-3 text-muted">
-                  {reviewForm.rating === 5 && 'Tuyệt vời'}
-                  {reviewForm.rating === 4 && 'Rất hay'}
-                  {reviewForm.rating === 3 && 'Bình thường'}
-                  {reviewForm.rating === 2 && 'Tạm được'}
-                  {reviewForm.rating === 1 && 'Tệ'}
-                </span>
-              </div>
-              <div className="mb-3">
-                <label className="form-label fw-bold">Viết bình luận:</label>
-                <textarea 
-                  className="form-control" 
-                  rows="3" 
-                  placeholder="Chia sẻ cảm nghĩ của bạn về cuốn sách này..."
-                  value={reviewForm.comment}
-                  onChange={(e) => setReviewForm({...reviewForm, comment: e.target.value})}
-                ></textarea>
-              </div>
-              <button type="submit" className="btn btn-primary" disabled={submittingReview}>
-                {submittingReview ? 'Đang gửi...' : 'Gửi Đánh Giá'}
+              <button
+                className="btn btn-light border px-4 py-2 font-semibold text-dark"
+                onClick={() => navigate(-1)}
+              >
+                Quay lại
               </button>
-            </form>
-            ) : (
-              <div className="alert alert-warning">
-                Bạn chỉ có thể đánh giá sau khi đã được mượn cuốn sách này!
-              </div>
-            )
-          ) : (
-            <div className="alert alert-info">
-              Vui lòng <button className="btn btn-link p-0 text-decoration-none" onClick={() => navigate('/login')}>đăng nhập</button> để gửi đánh giá.
             </div>
-          )}
-
-          <div className="reviews-list">
-            {reviews.length === 0 ? (
-              <p className="text-muted text-center py-3">Chưa có đánh giá nào cho cuốn sách này. Hãy là người đầu tiên!</p>
-            ) : (
-              reviews.map(review => (
-                <div key={review.id} className="review-item mb-3 p-3 bg-light rounded">
-                  <div className="d-flex justify-content-between mb-2">
-                    <span className="fw-bold">{review.member?.fullname || 'Thành viên ẩn danh'}</span>
-                    <small className="text-muted">{new Date(review.createdAt).toLocaleDateString('vi-VN')}</small>
-                  </div>
-                  <div style={{ color: '#ffc107', fontSize: '1.1rem' }} className="mb-2">
-                    {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
-                  </div>
-                  <p className="mb-0">{review.comment}</p>
-                </div>
-              ))
-            )}
           </div>
         </div>
+      </div>
+
+      {/* Reviews Section */}
+      <div className="card border-0 shadow-sm rounded-4 p-4 p-md-5 bg-white">
+        <h4 className="fw-bold text-dark mb-4 d-flex align-items-center gap-2">
+          <i className="bi bi-chat-square-quote" style={{ color: '#8B4000' }}></i> Đánh giá từ độc giả
+        </h4>
+
+        {isMember() && hasBorrowed && (
+          <form onSubmit={handleSubmitReview} className="mb-4 p-3 bg-light rounded-3 border">
+            <h6 className="fw-bold mb-3">Gửi đánh giá của bạn</h6>
+            <div className="d-flex align-items-center mb-3">
+              <label className="form-label me-3 mb-0 fw-semibold">Chấm điểm:</label>
+              <div style={{ fontSize: '1.5rem', cursor: 'pointer', userSelect: 'none' }}>
+                {[1, 2, 3, 4, 5].map(star => (
+                  <span 
+                    key={star}
+                    style={{ color: star <= reviewForm.rating ? '#8B4000' : '#cbd5e1' }}
+                    onClick={() => setReviewForm({...reviewForm, rating: star})}
+                    className="me-1"
+                  >
+                    ★
+                  </span>
+                ))}
+              </div>
+            </div>
+            <textarea 
+              className="form-control mb-3" 
+              rows="3" 
+              placeholder="Nhận xét cuốn sách..."
+              value={reviewForm.comment}
+              onChange={(e) => setReviewForm({...reviewForm, comment: e.target.value})}
+            ></textarea>
+            <button type="submit" className="btn btn-brown px-4 py-2 font-bold text-white" disabled={submittingReview} style={{ backgroundColor: '#8B4000' }}>
+              {submittingReview ? 'Đang gửi...' : 'Gửi Đánh Giá'}
+            </button>
+          </form>
+        )}
+
+        {reviews.length === 0 ? (
+          <p className="text-muted text-center py-3">Chưa có đánh giá nào cho cuốn sách này.</p>
+        ) : (
+          reviews.map(r => (
+            <div key={r.id} className="p-3 bg-light rounded-3 border mb-2">
+              <div className="d-flex justify-content-between mb-1">
+                <strong>{r.member?.name || 'Độc giả'}</strong>
+                <span style={{ color: '#8B4000' }}>{'★'.repeat(r.rating)}</span>
+              </div>
+              <p className="mb-0 text-muted small">{r.comment}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
