@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import categoryService from '../../services/categoryService';
+
+const CITIES = ['Hà Nội', 'Hồ Chí Minh', 'Đà Nẵng', 'Cần Thơ', 'Hải Phòng', 'Phú Thọ', 'Huế', 'Nha Trang'];
 
 export default function MemberForm({ member, onSave, onCancel }) {
   const [fullname, setFullname] = useState('');
@@ -9,138 +9,203 @@ export default function MemberForm({ member, onSave, onCancel }) {
   const [phone, setPhone] = useState('');
   const [gender, setGender] = useState('Nam');
   const [dob, setDob] = useState('');
-  const [city, setCity] = useState('');
+  const [city, setCity] = useState('Hà Nội');
   const [address, setAddress] = useState('');
-  const [favorites, setFavorites] = useState([]);
-  
-  const [availableCategories, setAvailableCategories] = useState([]);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    categoryService.getAllCategories().then(setAvailableCategories).catch(console.error);
-  }, []);
+  const [memberType, setMemberType] = useState('student');
+  const [studentId, setStudentId] = useState('');
+  const [className, setClassName] = useState('');
+  const [major, setMajor] = useState('');
+  const [enrollmentYear, setEnrollmentYear] = useState('');
+  const [department, setDepartment] = useState('');
+  const [position, setPosition] = useState('Giảng viên');
 
   useEffect(() => {
     if (member) {
-      setFullname(member.name || ''); // member.name is populated from user.fullname in LibrarianMembersPage
+      setFullname(member.name || '');
       setEmail(member.email || '');
-      setPassword(''); // Không hiển thị mật khẩu khi sửa
+      setPassword('');
       setPhone(member.phone || '');
       setGender(member.gender || 'Nam');
       setDob(member.dob || '');
-      setCity(member.city || '');
+      setCity(member.city || 'Hà Nội');
       setAddress(member.address || '');
-      setFavorites(member.favorites || []);
+      setMemberType(member.memberType || 'student');
+      setStudentId(member.studentId || '');
+      setClassName(member.className || '');
+      setMajor(member.major || '');
+      setEnrollmentYear(member.enrollmentYear || '');
+      setDepartment(member.department || '');
+      setPosition(member.position || 'Giảng viên');
     } else {
-      setFullname('');
-      setEmail('');
-      setPassword('');
-      setPhone('');
-      setGender('Nam');
-      setDob('');
-      setCity('');
-      setAddress('');
-      setFavorites([]);
+      resetForm();
     }
   }, [member]);
 
+  const resetForm = () => {
+    setFullname(''); setEmail(''); setPassword(''); setPhone('');
+    setGender('Nam'); setDob(''); setCity('Hà Nội'); setAddress('');
+    setMemberType('student'); setStudentId(''); setClassName('');
+    setMajor(''); setEnrollmentYear(''); setDepartment('');
+    setPosition('Giảng viên');
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!fullname.trim() || !email.trim() || !phone.trim() || (!member && !password.trim())) {
-      setError('Vui lòng điền đầy đủ các trường bắt buộc (Họ tên, Email, Mật khẩu, Số điện thoại)!');
-      return;
-    }
-    setError('');
-    onSave({
-      fullname, email, password, phone, gender, dob, city, address, favorites
-    });
+    const data = {
+      fullname, email, phone, gender, dob, city, address, memberType, major,
+      ...(password ? { password } : {}),
+      ...(memberType === 'student' ? { studentId, className, enrollmentYear: Number(enrollmentYear) } : {}),
+      ...(memberType === 'teacher' ? { department, position } : {})
+    };
+    onSave(data);
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      {error && <div className="alert alert-danger p-2">{error}</div>}
-      
-      <Form.Group className="mb-2">
-        <Form.Label className="fw-semibold">Họ tên *</Form.Label>
-        <Form.Control type="text" value={fullname} onChange={e => setFullname(e.target.value)} />
-      </Form.Group>
+    <form onSubmit={handleSubmit}>
+      {/* Loại thành viên */}
+      <div className="mb-3">
+        <label className="form-label fw-semibold">Loại thành viên <span className="text-danger">*</span></label>
+        <div>
+          <div className="form-check form-check-inline">
+            <input className="form-check-input" type="radio" name="memberType" id="type-student"
+              value="student" checked={memberType === 'student'}
+              onChange={(e) => setMemberType(e.target.value)} />
+            <label className="form-check-label" htmlFor="type-student">Sinh viên</label>
+          </div>
+          <div className="form-check form-check-inline">
+            <input className="form-check-input" type="radio" name="memberType" id="type-teacher"
+              value="teacher" checked={memberType === 'teacher'}
+              onChange={(e) => setMemberType(e.target.value)} />
+            <label className="form-check-label" htmlFor="type-teacher">Giảng viên</label>
+          </div>
+        </div>
+      </div>
 
-      <Form.Group className="mb-2">
-        <Form.Label className="fw-semibold">Email *</Form.Label>
-        <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)} disabled={!!member} />
-      </Form.Group>
+      <hr className="my-3" />
 
-      {!member && (
-        <Form.Group className="mb-2">
-          <Form.Label className="fw-semibold">Mật khẩu *</Form.Label>
-          <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        </Form.Group>
+      {/* Thông tin tài khoản */}
+      <h6 className="text-secondary mb-2">Thông tin tài khoản</h6>
+      <div className="mb-2">
+        <label className="form-label">Họ tên <span className="text-danger">*</span></label>
+        <input className="form-control form-control-sm" value={fullname} onChange={e => setFullname(e.target.value)} required />
+      </div>
+      <div className="mb-2">
+        <label className="form-label">Email <span className="text-danger">*</span></label>
+        <input className="form-control form-control-sm" type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+      </div>
+      <div className="mb-2">
+        <label className="form-label">Mật khẩu {!member && <span className="text-danger">*</span>}</label>
+        <input className="form-control form-control-sm" type="password" value={password}
+          onChange={e => setPassword(e.target.value)} required={!member}
+          placeholder={member ? 'Để trống nếu không đổi' : 'Tối thiểu 6 ký tự'} />
+      </div>
+
+      <hr className="my-3" />
+
+      {/* Thông tin học vụ */}
+      <h6 className="text-secondary mb-2">
+        {memberType === 'student' ? 'Thông tin sinh viên' : 'Thông tin giảng viên'}
+      </h6>
+
+      {memberType === 'student' ? (
+        <>
+          <div className="row">
+            <div className="col-6 mb-2">
+              <label className="form-label">MSSV <span className="text-danger">*</span></label>
+              <input className="form-control form-control-sm" value={studentId}
+                onChange={e => setStudentId(e.target.value)} placeholder="VD: SE1701" required />
+            </div>
+            <div className="col-6 mb-2">
+              <label className="form-label">Lớp</label>
+              <input className="form-control form-control-sm" value={className}
+                onChange={e => setClassName(e.target.value)} placeholder="VD: SE1809" />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-6 mb-2">
+              <label className="form-label">Ngành</label>
+              <input className="form-control form-control-sm" value={major}
+                onChange={e => setMajor(e.target.value)} placeholder="VD: Kỹ thuật PM" />
+            </div>
+            <div className="col-6 mb-2">
+              <label className="form-label">Khoá (năm nhập học)</label>
+              <input className="form-control form-control-sm" type="number" value={enrollmentYear}
+                onChange={e => setEnrollmentYear(e.target.value)} placeholder="VD: 2023" />
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="mb-2">
+            <label className="form-label">Khoa <span className="text-danger">*</span></label>
+            <input className="form-control form-control-sm" value={department}
+              onChange={e => setDepartment(e.target.value)} placeholder="VD: Khoa CNTT" required />
+          </div>
+          <div className="row">
+            <div className="col-6 mb-2">
+              <label className="form-label">Chuyên ngành</label>
+              <input className="form-control form-control-sm" value={major}
+                onChange={e => setMajor(e.target.value)} placeholder="VD: Trí tuệ nhân tạo" />
+            </div>
+            <div className="col-6 mb-2">
+              <label className="form-label">Chức danh</label>
+              <select className="form-select form-select-sm" value={position} onChange={e => setPosition(e.target.value)}>
+                <option value="Giảng viên">Giảng viên</option>
+                <option value="Thạc sĩ">Thạc sĩ</option>
+                <option value="Tiến sĩ">Tiến sĩ</option>
+                <option value="Phó Giáo sư">Phó Giáo sư</option>
+                <option value="Giáo sư">Giáo sư</option>
+              </select>
+            </div>
+          </div>
+        </>
       )}
 
-      <Form.Group className="mb-2">
-        <Form.Label className="fw-semibold">Số điện thoại *</Form.Label>
-        <Form.Control type="text" value={phone} onChange={e => setPhone(e.target.value)} />
-      </Form.Group>
+      <hr className="my-3" />
 
-      <Form.Group className="mb-2">
-        <Form.Label className="fw-semibold">Giới tính</Form.Label>
-        <div>
-          <Form.Check inline type="radio" label="Nam" checked={gender === 'Nam'} onChange={() => setGender('Nam')} />
-          <Form.Check inline type="radio" label="Nữ" checked={gender === 'Nữ'} onChange={() => setGender('Nữ')} />
+      {/* Thông tin cá nhân */}
+      <h6 className="text-secondary mb-2">Thông tin cá nhân</h6>
+      <div className="row">
+        <div className="col-6 mb-2">
+          <label className="form-label">SĐT <span className="text-danger">*</span></label>
+          <input className="form-control form-control-sm" value={phone} onChange={e => setPhone(e.target.value)} required />
         </div>
-      </Form.Group>
-
-      <Form.Group className="mb-2">
-        <Form.Label className="fw-semibold">Ngày sinh</Form.Label>
-        <Form.Control type="date" value={dob} onChange={e => setDob(e.target.value)} />
-      </Form.Group>
-
-      <Form.Group className="mb-2">
-        <Form.Label className="fw-semibold">Thành phố</Form.Label>
-        <Form.Select value={city} onChange={e => setCity(e.target.value)}>
-          <option value="">-- Chọn thành phố --</option>
-          <option value="Hà Nội">Hà Nội</option>
-          <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-          <option value="Đà Nẵng">Đà Nẵng</option>
-          <option value="Cần Thơ">Cần Thơ</option>
-          <option value="Hải Phòng">Hải Phòng</option>
-        </Form.Select>
-      </Form.Group>
-
-      <Form.Group className="mb-2">
-        <Form.Label className="fw-semibold">Địa chỉ</Form.Label>
-        <Form.Control as="textarea" rows={2} value={address} onChange={e => setAddress(e.target.value)} />
-      </Form.Group>
-
-      <Form.Group className="mb-3">
-        <Form.Label className="fw-semibold">Thể loại yêu thích</Form.Label>
-        <div>
-          {availableCategories.map(cat => (
-            <Form.Check
-              inline
-              key={cat.id}
-              type="checkbox"
-              label={cat.name}
-              checked={favorites.includes(cat.name)}
-              onChange={(e) => {
-                if (e.target.checked) setFavorites([...favorites, cat.name]);
-                else setFavorites(favorites.filter(f => f !== cat.name));
-              }}
-            />
-          ))}
+        <div className="col-6 mb-2">
+          <label className="form-label">Giới tính</label>
+          <select className="form-select form-select-sm" value={gender} onChange={e => setGender(e.target.value)}>
+            <option value="Nam">Nam</option>
+            <option value="Nữ">Nữ</option>
+            <option value="Khác">Khác</option>
+          </select>
         </div>
-      </Form.Group>
+      </div>
+      <div className="row">
+        <div className="col-6 mb-2">
+          <label className="form-label">Ngày sinh</label>
+          <input className="form-control form-control-sm" type="date" value={dob} onChange={e => setDob(e.target.value)} />
+        </div>
+        <div className="col-6 mb-2">
+          <label className="form-label">Thành phố</label>
+          <select className="form-select form-select-sm" value={city} onChange={e => setCity(e.target.value)}>
+            {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </div>
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Địa chỉ</label>
+        <input className="form-control form-control-sm" value={address} onChange={e => setAddress(e.target.value)} />
+      </div>
 
       <div className="d-flex gap-2">
-        <Button variant="primary" type="submit" className="w-100">
-          {member ? 'Cập nhật' : 'Thêm độc giả'}
-        </Button>
+        <button type="submit" className="btn btn-primary btn-sm flex-grow-1">
+          {member ? 'Cập nhật' : 'Thêm mới'}
+        </button>
         {member && (
-          <Button variant="secondary" onClick={onCancel} className="w-100">
-            Hủy / Thêm mới
-          </Button>
+          <button type="button" className="btn btn-outline-secondary btn-sm" onClick={() => { onCancel(); resetForm(); }}>
+            Huỷ
+          </button>
         )}
       </div>
-    </Form>
+    </form>
   );
 }

@@ -2,23 +2,34 @@ import { useState, useEffect } from 'react';
 
 export default function BookForm({ book, categories = [], onSave, onCancel }) {
   const [form, setForm] = useState({
-    title: '', author: '', categoryId: '', totalCopies: 1, availableCopies: 1, coverImage: ''
+    bookCode: '', title: '', author: '', categoryId: '', totalCopies: 1, availableCopies: 1, coverImage: ''
   });
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (book) setForm(book);
-    else setForm({ title: '', author: '', categoryId: '', totalCopies: 1, availableCopies: 1, coverImage: '' });
+    else setForm({ bookCode: '', title: '', author: '', categoryId: '', totalCopies: 1, availableCopies: 1, coverImage: '' });
   }, [book]);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = () => {
+    const totalCopies = Number(form.totalCopies);
+    const availableCopies = Number(form.availableCopies);
+
     if (!form.title.trim() || !form.author.trim() || !form.categoryId) {
       setError('Vui lòng điền đầy đủ thông tin bắt buộc!');
       return;
     }
-    if (parseInt(form.availableCopies) > parseInt(form.totalCopies)) {
+    if (!Number.isInteger(totalCopies) || totalCopies < 1) {
+      setError('Tổng số sách phải là số nguyên và lớn hơn hoặc bằng 1!');
+      return;
+    }
+    if (!Number.isInteger(availableCopies) || availableCopies < 0) {
+      setError('Số sách còn lại phải là số nguyên và không được âm!');
+      return;
+    }
+    if (availableCopies > totalCopies) {
       setError('Số sách còn lại không được vượt quá tổng số!');
       return;
     }
@@ -51,16 +62,21 @@ export default function BookForm({ book, categories = [], onSave, onCancel }) {
 
     onSave({
       ...form,
+      bookCode: form.bookCode.trim(),
       coverImage: processedCoverImage,
       categoryId: form.categoryId,
-      totalCopies: parseInt(form.totalCopies),
-      availableCopies: parseInt(form.availableCopies),
+      totalCopies,
+      availableCopies,
     });
   };
 
   return (
     <div>
       {error && <div className="alert alert-danger">{error}</div>}
+      <div className="mb-2">
+        <label className="form-label">Mã sách</label>
+        <input name="bookCode" className="form-control" value={form.bookCode || ''} onChange={handleChange} placeholder="Tự tạo nếu bỏ trống" />
+      </div>
       <div className="mb-2">
         <label className="form-label">Tên sách *</label>
         <input name="title" className="form-control" value={form.title} onChange={handleChange} />
@@ -79,11 +95,11 @@ export default function BookForm({ book, categories = [], onSave, onCancel }) {
       <div className="row mb-2">
         <div className="col">
           <label className="form-label">Tổng số</label>
-          <input name="totalCopies" type="number" min="1" className="form-control" value={form.totalCopies} onChange={handleChange} />
+          <input name="totalCopies" type="number" min="1" step="1" className="form-control" value={form.totalCopies} onChange={handleChange} />
         </div>
         <div className="col">
           <label className="form-label">Còn lại</label>
-          <input name="availableCopies" type="number" min="0" className="form-control" value={form.availableCopies} onChange={handleChange} />
+          <input name="availableCopies" type="number" min="0" step="1" className="form-control" value={form.availableCopies} onChange={handleChange} />
         </div>
       </div>
       <div className="mb-3">
